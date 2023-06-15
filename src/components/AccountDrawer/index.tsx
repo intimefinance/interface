@@ -68,6 +68,9 @@ const Scrim = ({ onClick, open }: { onClick: () => void; open: boolean }) => {
   return <ScrimBackground onClick={onClick} open={open} />
 }
 
+/**
+ * border-radius: 12px;
+ */
 const AccountDrawerScrollWrapper = styled.div`
   overflow: hidden;
   &:hover {
@@ -78,7 +81,6 @@ const AccountDrawerScrollWrapper = styled.div`
 
   scrollbar-gutter: stable;
   overscroll-behavior: contain;
-  border-radius: 12px;
 `
 
 const Container = styled.div`
@@ -100,6 +102,9 @@ const Container = styled.div`
   }
 `
 
+/**
+ * border-radius: 12px;
+ */
 const AccountDrawerWrapper = styled.div<{ open: boolean }>`
   margin-right: ${({ open }) => (open ? 0 : '-' + DRAWER_WIDTH)};
   height: 100%;
@@ -123,7 +128,6 @@ const AccountDrawerWrapper = styled.div<{ open: boolean }>`
     width: ${DRAWER_WIDTH_XL};
   }
 
-  border-radius: 12px;
   width: ${DRAWER_WIDTH};
   font-size: 16px;
   background-color: ${({ theme }) => theme.backgroundSurface};
@@ -137,13 +141,15 @@ const CloseIcon = styled(ChevronsRight).attrs({ size: 24 })`
   stroke: ${({ theme }) => theme.textSecondary};
 `
 
+/**
+ * border-radius: 20px 0 0 20px;
+ */
 const CloseDrawer = styled.div`
   ${ClickableStyle}
   cursor: pointer;
   height: 100%;
   // When the drawer is not hovered, the icon should be 18px from the edge of the sidebar.
   padding: 24px calc(18px + ${DRAWER_OFFSET}) 24px 14px;
-  border-radius: 20px 0 0 20px;
   transition: ${({ theme }) =>
     `${theme.transition.duration.medium} ${theme.transition.timing.ease} background-color, ${theme.transition.duration.medium} ${theme.transition.timing.ease} margin`};
   &:hover {

@@ -16,6 +16,10 @@ const StyledClose = styled(X)<{ $padding: number }>`
     cursor: pointer;
   }
 `
+
+/**
+ * border-radius: 16px;
+ */
 const PopupCss = css<{ show: boolean }>`
   display: inline-block;
   width: 100%;
@@ -23,7 +27,6 @@ const PopupCss = css<{ show: boolean }>`
   background-color: ${({ theme }) => theme.backgroundSurface};
   position: relative;
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
-  border-radius: 16px;
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.deepShadow};
   transition: ${({ theme }) => `visibility ${theme.transition.duration.fast} ease-in-out`};

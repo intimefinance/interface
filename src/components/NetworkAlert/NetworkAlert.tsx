@@ -29,15 +29,16 @@ const RootWrapper = styled.div`
 `
 
 const SHOULD_SHOW_ALERT = {
-  [SupportedChainId.OPTIMISM]: true,
-  [SupportedChainId.OPTIMISM_GOERLI]: true,
-  [SupportedChainId.ARBITRUM_ONE]: true,
-  [SupportedChainId.ARBITRUM_GOERLI]: true,
-  [SupportedChainId.POLYGON]: true,
-  [SupportedChainId.POLYGON_MUMBAI]: true,
-  [SupportedChainId.CELO]: true,
-  [SupportedChainId.CELO_ALFAJORES]: true,
-  [SupportedChainId.BNB]: true,
+  [SupportedChainId.OPTIMISM]: false,
+  [SupportedChainId.OPTIMISM_GOERLI]: false,
+  [SupportedChainId.ARBITRUM_ONE]: false,
+  [SupportedChainId.ARBITRUM_GOERLI]: false,
+  [SupportedChainId.POLYGON]: false,
+  [SupportedChainId.POLYGON_MUMBAI]: false,
+  [SupportedChainId.CELO]: false,
+  [SupportedChainId.CELO_ALFAJORES]: false,
+  [SupportedChainId.BNB]: false,
+  [SupportedChainId.CORE_TEST]: true,
 }
 
 type NetworkAlertChains = keyof typeof SHOULD_SHOW_ALERT
@@ -64,6 +65,8 @@ const BG_COLORS_BY_DARK_MODE_AND_CHAIN_ID: {
       'radial-gradient(285% 8200% at 30% 50%, rgba(40, 160, 240, 0.01) 0%, rgba(219, 255, 0, 0) 100%),radial-gradient(75% 75% at 0% 0%, rgba(150, 190, 220, 0.05) 0%, rgba(33, 114, 229, 0.05) 100%), hsla(0, 0%, 100%, 0.05)',
     [SupportedChainId.ARBITRUM_GOERLI]:
       'radial-gradient(285% 8200% at 30% 50%, rgba(40, 160, 240, 0.05) 0%, rgba(219, 255, 0, 0) 100%),radial-gradient(75% 75% at 0% 0%, rgba(150, 190, 220, 0.05) 0%, rgba(33, 114, 229, 0.1) 100%), hsla(0, 0%, 100%, 0.05)',
+    [SupportedChainId.CORE_TEST]:
+      'radial-gradient(182.71% 150.59% at 2.81% 7.69%, rgba(235, 108, 34, 0.16) 0%, rgba(235, 108, 34, 0.16) 100%)',
   },
   light: {
     [SupportedChainId.POLYGON]:
@@ -84,17 +87,24 @@ const BG_COLORS_BY_DARK_MODE_AND_CHAIN_ID: {
       'radial-gradient(285% 8200% at 30% 50%, rgba(40, 160, 240, 0.1) 0%, rgba(219, 255, 0, 0) 100%),radial-gradient(circle at top left, hsla(206, 50%, 75%, 0.01), hsla(215, 79%, 51%, 0.12)), hsla(0, 0%, 100%, 0.1)',
     [SupportedChainId.ARBITRUM_GOERLI]:
       'radial-gradient(285% 8200% at 30% 50%, rgba(40, 160, 240, 0.1) 0%, rgba(219, 255, 0, 0) 100%),radial-gradient(circle at top left, hsla(206, 50%, 75%, 0.01), hsla(215, 79%, 51%, 0.12)), hsla(0, 0%, 100%, 0.1)',
+    [SupportedChainId.CORE_TEST]:
+      'radial-gradient(285% 8200% at 30% 50%, rgba(40, 160, 240, 0.1) 0%, rgba(219, 255, 0, 0) 100%),radial-gradient(circle at top left, hsla(206, 50%, 75%, 0.01), hsla(215, 79%, 51%, 0.12)), hsla(0, 0%, 100%, 0.1)',
   },
 }
 
-const ContentWrapper = styled.div<{ chainId: NetworkAlertChains; darkMode: boolean; logoUrl: string }>`
+const ContentWrapper = styled.div<{
+  chainId: NetworkAlertChains
+  darkMode: boolean
+  logoUrl: string
+}>`
   background: ${({ chainId, darkMode }) => BG_COLORS_BY_DARK_MODE_AND_CHAIN_ID[darkMode ? 'dark' : 'light'][chainId]};
-  border-radius: 20px;
+  border-radius: 0;
   display: flex;
   flex-direction: row;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: calc(100% - 16px);
+  margin: auto;
 
   :before {
     background-image: url(${({ logoUrl }) => logoUrl});
@@ -114,15 +124,15 @@ const Header = styled.h2`
   margin: 0;
 `
 
+// margin-right: 12px;
 const LinkOutToBridge = styled(ExternalLink)`
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0;
   color: white;
   display: flex;
   font-size: 16px;
   justify-content: space-between;
   padding: 6px 8px;
-  margin-right: 12px;
   text-decoration: none !important;
   width: 100%;
 `
@@ -143,6 +153,7 @@ const TEXT_COLORS: { [chainId in NetworkAlertChains]: string } = {
   [SupportedChainId.ARBITRUM_ONE]: '#0490ed',
   [SupportedChainId.BNB]: colors.gold400,
   [SupportedChainId.ARBITRUM_GOERLI]: '#0490ed',
+  [SupportedChainId.CORE_TEST]: colors.orange400,
 }
 
 function shouldShowAlert(chainId: number | undefined): chainId is NetworkAlertChains {

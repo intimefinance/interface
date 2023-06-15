@@ -29,6 +29,9 @@ const EmptyWalletSubtitle = styled(ThemedText.BodySmall)`
   margin-top: 8px;
 `
 
+/**
+ * border-radius: 12px;
+ */
 const ActionButton = styled.button`
   background-color: ${({ theme }) => theme.accentAction};
   padding: 10px 24px;
@@ -36,7 +39,6 @@ const ActionButton = styled.button`
   width: min-content;
   border: none;
   outline: none;
-  border-radius: 12px;
   white-space: nowrap;
   cursor: pointer;
   margin-top: 20px;

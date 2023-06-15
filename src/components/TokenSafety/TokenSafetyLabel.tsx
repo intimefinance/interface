@@ -5,11 +5,13 @@ import { AlertTriangle, Slash } from 'react-feather'
 import { Text } from 'rebass'
 import styled from 'styled-components/macro'
 
+/**
+ * border-radius: 8px;
+ */
 const Label = styled.div<{ color: string; backgroundColor: string }>`
   padding: 4px 4px;
   font-size: 12px;
   background-color: ${({ backgroundColor }) => backgroundColor};
-  border-radius: 8px;
   color: ${({ color }) => color};
   display: inline-flex;
   align-items: center;

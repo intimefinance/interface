@@ -25,33 +25,48 @@ import { RowBetween, RowFixed } from '../Row'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { FiatValue } from './FiatValue'
 
+/**
+ * border-radius: ${({ hideInput }) => (hideInput ? '16px' : '20px')};
+ */
 const InputPanel = styled.div<{ hideInput?: boolean }>`
   ${flexColumnNoWrap};
   position: relative;
-  border-radius: ${({ hideInput }) => (hideInput ? '16px' : '20px')};
   z-index: 1;
   width: ${({ hideInput }) => (hideInput ? '100%' : 'initial')};
   transition: height 1s ease;
   will-change: height;
 `
 
+/**
+ * border-radius: 20px;
+ */
 const FixedContainer = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
 `
 
+/**
+ * border-radius: ${({ hideInput }) => (hideInput ? '16px' : '20px')};
+ */
 const Container = styled.div<{ hideInput: boolean }>`
   min-height: 44px;
-  border-radius: ${({ hideInput }) => (hideInput ? '16px' : '20px')};
   width: ${({ hideInput }) => (hideInput ? '100%' : 'initial')};
 `
 
+/**
+ * border-radius: 16px;
+ * &:hover:before {
+ * background-color: ${({ theme }) => theme.stateOverlayHover};
+ * }
+ * &:active:before {
+ * background-color: ${({ theme }) => theme.stateOverlayPressed};
+ * }
+ */
 const CurrencySelect = styled(ButtonGray)<{
   visible: boolean
   selected: boolean
@@ -59,27 +74,27 @@ const CurrencySelect = styled(ButtonGray)<{
   disabled?: boolean
 }>`
   align-items: center;
-  background-color: ${({ selected, theme }) => (selected ? theme.backgroundInteractive : theme.accentAction)};
+  background-color: ${({ selected, theme }) => (selected ? 'rgba(255, 255, 255, 0.1)' : theme.accentAction)};
   opacity: ${({ disabled }) => (!disabled ? 1 : 0.4)};
   box-shadow: ${({ selected }) => (selected ? 'none' : '0px 6px 10px rgba(0, 0, 0, 0.075)')};
   color: ${({ selected, theme }) => (selected ? theme.textPrimary : theme.white)};
   cursor: pointer;
   height: unset;
-  border-radius: 16px;
   outline: none;
   user-select: none;
   border: none;
   font-size: 24px;
   font-weight: 400;
   width: ${({ hideInput }) => (hideInput ? '100%' : 'initial')};
-  padding: ${({ selected }) => (selected ? '4px 8px 4px 4px' : '6px 6px 6px 8px')};
+  padding: ${({ selected }) => (selected ? '4px 8px 4px 8px' : '6px 8px 6px 8px')};
   gap: 8px;
   justify-content: space-between;
   margin-left: ${({ hideInput }) => (hideInput ? '0' : '12px')};
 
   &:hover,
   &:active {
-    background-color: ${({ theme, selected }) => (selected ? theme.backgroundInteractive : theme.accentAction)};
+    background-color: ${({ theme, selected }) =>
+      selected ? theme.backgroundInteractive : darken(0.05, theme.accentAction)};
   }
 
   &:before {
@@ -93,14 +108,6 @@ const CurrencySelect = styled(ButtonGray)<{
     width: 100%;
     height: 100%;
     content: '';
-  }
-
-  &:hover:before {
-    background-color: ${({ theme }) => theme.stateOverlayHover};
-  }
-
-  &:active:before {
-    background-color: ${({ theme }) => theme.stateOverlayPressed};
   }
 
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};

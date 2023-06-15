@@ -31,7 +31,7 @@ const InputRow = styled.div`
 `
 
 const SmallButton = styled(ButtonGray)`
-  border-radius: 8px;
+  border-radius: 0;
   padding: 4px;
 `
 
@@ -65,6 +65,7 @@ const InputTitle = styled(ThemedText.DeprecatedSmall)`
 
 const ButtonLabel = styled(ThemedText.DeprecatedWhite)<{ disabled: boolean }>`
   color: ${({ theme, disabled }) => (disabled ? theme.textSecondary : theme.textPrimary)} !important;
+  line-height: 1;
 `
 
 interface StepCounterProps {

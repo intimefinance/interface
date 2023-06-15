@@ -2,7 +2,7 @@ import { Trans } from '@lingui/macro'
 import { Currency } from '@uniswap/sdk-core'
 import { Position } from '@uniswap/v3-sdk'
 import RangeBadge from 'components/Badge/RangeBadge'
-import { LightCard } from 'components/Card'
+import Card, { LightCard } from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import { Break } from 'components/earn/styled'
@@ -77,7 +77,7 @@ export const PositionPreview = ({
         <RangeBadge removed={removed} inRange={inRange} />
       </RowBetween>
 
-      <LightCard>
+      <Card $backgroundColor={theme.backgroundLight}>
         <AutoColumn gap="md">
           <RowBetween>
             <RowFixed>
@@ -107,7 +107,7 @@ export const PositionPreview = ({
             </ThemedText.DeprecatedLabel>
           </RowBetween>
         </AutoColumn>
-      </LightCard>
+      </Card>
 
       <AutoColumn gap="md">
         <RowBetween>
@@ -120,7 +120,7 @@ export const PositionPreview = ({
         </RowBetween>
 
         <RowBetween>
-          <LightCard width="48%" padding="8px">
+          <LightCard width="48%" padding="8px" $backgroundColor="none">
             <AutoColumn gap="4px" justify="center">
               <ThemedText.DeprecatedMain fontSize="12px">
                 <Trans>Min Price</Trans>
@@ -143,7 +143,7 @@ export const PositionPreview = ({
             </AutoColumn>
           </LightCard>
 
-          <LightCard width="48%" padding="8px">
+          <LightCard width="48%" padding="8px" $backgroundColor="none">
             <AutoColumn gap="4px" justify="center">
               <ThemedText.DeprecatedMain fontSize="12px">
                 <Trans>Max Price</Trans>
@@ -166,7 +166,7 @@ export const PositionPreview = ({
             </AutoColumn>
           </LightCard>
         </RowBetween>
-        <LightCard padding="12px ">
+        <LightCard padding="12px " $backgroundColor="none">
           <AutoColumn gap="4px" justify="center">
             <ThemedText.DeprecatedMain fontSize="12px">
               <Trans>Current price</Trans>

@@ -20,9 +20,11 @@ import { ButtonPrimary } from '../Button'
 import { AutoColumn } from '../Column'
 import { CardBGImage, CardNoise } from '../earn/styled'
 
+/**
+ * border-radius: 20px;
+ */
 const StyledClaimPopup = styled(AutoColumn)`
   background: radial-gradient(76.02% 75.41% at 1.84% 0%, #ff007a 0%, #021d43 100%);
-  border-radius: 20px;
   padding: 1.5rem;
   overflow: hidden;
   position: relative;
@@ -121,7 +123,7 @@ export default function ClaimPopup() {
             </ThemedText.DeprecatedSubHeader>
           </AutoColumn>
           <AutoColumn style={{ zIndex: 10 }} justify="center">
-            <ButtonPrimary padding="8px" $borderRadius="8px" width="fit-content" onClick={handleToggleSelfClaimModal}>
+            <ButtonPrimary padding="8px" $borderRadius="0" width="fit-content" onClick={handleToggleSelfClaimModal}>
               <Trans>Claim your UNI tokens</Trans>
             </ButtonPrimary>
           </AutoColumn>

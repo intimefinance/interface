@@ -13,9 +13,11 @@ export const IconHoverText = styled.span`
   left: 10px;
 `
 
+/**
+ * border-radius: 12px;
+ */
 const IconStyles = css`
   background-color: ${({ theme }) => theme.backgroundInteractive};
-  border-radius: 12px;
   display: inline-block;
   cursor: pointer;
   position: relative;

@@ -174,7 +174,7 @@ export default function FeeSelector({
               )}
             </AutoColumn>
 
-            <ButtonGray onClick={() => setShowOptions(!showOptions)} width="auto" padding="4px" $borderRadius="6px">
+            <ButtonGray onClick={() => setShowOptions(!showOptions)} width="auto" padding="4px" $borderRadius="0">
               {showOptions ? <Trans>Hide</Trans> : <Trans>Edit</Trans>}
             </ButtonGray>
           </RowBetween>

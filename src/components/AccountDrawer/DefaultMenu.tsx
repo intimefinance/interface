@@ -10,6 +10,7 @@ import SettingsMenu from './SettingsMenu'
 const DefaultMenuWrap = styled(Column)`
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.background};
 `
 
 enum MenuState {

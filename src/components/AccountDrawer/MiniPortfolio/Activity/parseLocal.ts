@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro'
 import { formatCurrencyAmount } from '@uniswap/conedison/format'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
-import { nativeOnChain } from '@uniswap/smart-order-router'
 import { SupportedChainId } from 'constants/chains'
 import { TransactionPartsFragment, TransactionStatus } from 'graphql/data/__generated__/types-and-hooks'
 import { ChainTokenMap, useAllTokensMultichain } from 'hooks/Tokens'
@@ -22,6 +21,8 @@ import {
   WrapTransactionInfo,
 } from 'state/transactions/types'
 
+// import { nativeOnChain } from '@uniswap/smart-order-router'
+import { nativeOnChain } from '../../../../constants/tokens'
 import { getActivityTitle } from '../constants'
 import { Activity, ActivityMap } from './types'
 

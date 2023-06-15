@@ -1,8 +1,8 @@
 import '@reach/dialog/styles.css'
 import 'inter-ui'
 import 'polyfills'
-import 'tracing'
 
+// import 'tracing'
 import { ApolloProvider } from '@apollo/client'
 import { FeatureFlagsProvider } from 'featureFlags'
 import { apolloClient } from 'graphql/data/apollo'
@@ -13,7 +13,6 @@ import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
-import { SystemThemeUpdater } from 'theme/components/ThemeToggle'
 
 import Web3Provider from './components/Web3Provider'
 import { LanguageProvider } from './i18n'
@@ -36,7 +35,7 @@ function Updaters() {
     <>
       <RadialGradientByChainUpdater />
       <ListsUpdater />
-      <SystemThemeUpdater />
+      {/* <SystemThemeUpdater /> */}
       <ApplicationUpdater />
       <TransactionUpdater />
       <MulticallUpdater />

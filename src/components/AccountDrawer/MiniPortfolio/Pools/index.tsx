@@ -1,12 +1,10 @@
 import { t } from '@lingui/macro'
 import { TraceEvent } from '@uniswap/analytics'
 import { BrowserEvent, InterfaceElementName, SharedEventName } from '@uniswap/analytics-events'
-import { formatNumber, NumberType } from '@uniswap/conedison/format'
 import { Position } from '@uniswap/v3-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
 import Row from 'components/Row'
-import { MouseoverTooltip } from 'components/Tooltip'
 import { useFilterPossiblyMaliciousPositions } from 'hooks/useFilterPossiblyMaliciousPositions'
 import { EmptyWalletModule } from 'nft/components/profile/view/EmptyWalletContent'
 import { useCallback, useMemo, useReducer } from 'react'
@@ -19,7 +17,6 @@ import { ExpandoRow } from '../ExpandoRow'
 import { PortfolioLogo } from '../PortfolioLogo'
 import PortfolioRow, { PortfolioSkeleton, PortfolioTabWrapper } from '../PortfolioRow'
 import { PositionInfo } from './cache'
-import { useFeeValues } from './hooks'
 import useMultiChainPositions from './useMultiChainPositions'
 
 /**
@@ -120,8 +117,8 @@ function calculcateLiquidityValue(price0: number | undefined, price1: number | u
 function PositionListItem({ positionInfo }: { positionInfo: PositionInfo }) {
   const { chainId, position, pool, details, inRange, closed } = positionInfo
 
-  const { priceA, priceB, fees: feeValue } = useFeeValues(positionInfo)
-  const liquidityValue = calculcateLiquidityValue(priceA, priceB, position)
+  // const { priceA, priceB, fees: feeValue } = useFeeValues(positionInfo)
+  // const liquidityValue = calculcateLiquidityValue(priceA, priceB, position)
 
   const navigate = useNavigate()
   const toggleWalletDrawer = useToggleAccountDrawer()
@@ -162,7 +159,7 @@ function PositionListItem({ positionInfo }: { positionInfo: PositionInfo }) {
         descriptor={<ThemedText.Caption>{`${pool.fee / 10000}%`}</ThemedText.Caption>}
         right={
           <>
-            <MouseoverTooltip
+            {/* <MouseoverTooltip
               placement="left"
               text={
                 <div style={{ padding: '4px 0px' }}>
@@ -176,7 +173,7 @@ function PositionListItem({ positionInfo }: { positionInfo: PositionInfo }) {
               <ThemedText.SubHeader>
                 {formatNumber((liquidityValue ?? 0) + (feeValue ?? 0), NumberType.PortfolioBalance)}
               </ThemedText.SubHeader>
-            </MouseoverTooltip>
+            </MouseoverTooltip> */}
 
             <Row justify="flex-end">
               <ThemedText.Caption color="textSecondary">

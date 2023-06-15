@@ -8,7 +8,7 @@ import { PositionDetails } from 'types/position'
 const DesktopHeader = styled.div`
   display: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: bold;
   padding: 16px;
   border-bottom: 1px solid ${({ theme }) => theme.backgroundOutline};
 
@@ -24,14 +24,11 @@ const DesktopHeader = styled.div`
 `
 
 const MobileHeader = styled.div`
-  font-weight: medium;
-  padding: 8px;
-  font-weight: 500;
-  padding: 16px;
+  padding: 16px 10px;
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
   border-bottom: 1px solid ${({ theme }) => theme.backgroundOutline};
 
   @media screen and (min-width: ${MEDIA_WIDTHS.deprecated_upToSmall}px) {
@@ -56,7 +53,6 @@ const ToggleLabel = styled.button`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.accentAction};
-  font-size: 1rem;
 `
 
 type PositionListProps = React.PropsWithChildren<{

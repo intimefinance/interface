@@ -8,11 +8,13 @@ import styled, { useTheme } from 'styled-components/macro'
 
 const LOGO_SIZE = 20
 
+/**
+ * border-radius: 12px;
+ */
 const Container = styled.button<{ disabled: boolean }>`
   align-items: center;
   background: none;
   border: none;
-  border-radius: 12px;
   color: ${({ theme }) => theme.textPrimary};
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
   display: grid;

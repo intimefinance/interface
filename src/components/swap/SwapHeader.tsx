@@ -1,7 +1,5 @@
-import { Trans } from '@lingui/macro'
 import { Percent } from '@uniswap/sdk-core'
 import { useFiatOnRampButtonEnabled } from 'featureFlags/flags/fiatOnRampButton'
-import { subhead } from 'nft/css/common.css'
 import styled from 'styled-components/macro'
 
 import { RowBetween, RowFixed } from '../Row'
@@ -32,9 +30,9 @@ export default function SwapHeader({ allowedSlippage }: { allowedSlippage: Perce
     <StyledSwapHeader>
       <RowBetween>
         <RowFixed style={{ gap: '8px' }}>
-          <TextHeader className={subhead}>
+          {/* <TextHeader className={subhead}>
             <Trans>Swap</Trans>
-          </TextHeader>
+          </TextHeader> */}
           {fiatOnRampButtonEnabled && <SwapBuyFiatButton />}
         </RowFixed>
         <RowFixed>

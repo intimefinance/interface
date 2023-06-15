@@ -10,7 +10,6 @@ import {
 } from '@uniswap/analytics-events'
 import { Trade } from '@uniswap/router-sdk'
 import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
 import { sendEvent } from 'components/analytics'
@@ -49,10 +48,17 @@ import SwapCurrencyInputPanel from '../../components/CurrencyInputPanel/SwapCurr
 import { AutoRow } from '../../components/Row'
 import confirmPriceImpactWithoutFee from '../../components/swap/confirmPriceImpactWithoutFee'
 import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
-import { ArrowWrapper, PageWrapper, SwapCallbackError, SwapWrapper } from '../../components/swap/styleds'
+import {
+  ArrowContainer,
+  ArrowWrapper,
+  PageWrapper,
+  SwapCallbackError,
+  SwapWrapper,
+} from '../../components/swap/styleds'
 import SwapHeader from '../../components/swap/SwapHeader'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import { getSwapCurrencyId, TOKEN_SHORTHANDS } from '../../constants/tokens'
+import { UNIVERSAL_ROUTER_ADDRESS } from '../../constants/universalRouterAddress'
 import { useCurrency, useDefaultActiveTokens } from '../../hooks/Tokens'
 import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
 import useWrapCallback, { WrapErrorText, WrapType } from '../../hooks/useWrapCallback'
@@ -65,20 +71,22 @@ import { computeFiatValuePriceImpact } from '../../utils/computeFiatValuePriceIm
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { computeRealizedPriceImpact, warningSeverity } from '../../utils/prices'
 import { supportedChainId } from '../../utils/supportedChainId'
-const ArrowContainer = styled.div`
-  display: inline-block;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+// const ArrowContainer = styled.div`
+//   display: inline-block;
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center;
 
-  width: 100%;
-  height: 100%;
-`
+//   width: 100%;
+//   height: 100%;
+// `
 
+/**
+ * border-radius: 12px;
+ * background-color: ${({ theme }) => theme.backgroundModule};
+ */
 const SwapSection = styled.div`
   position: relative;
-  background-color: ${({ theme }) => theme.backgroundModule};
-  border-radius: 12px;
   padding: 16px;
   color: ${({ theme }) => theme.textSecondary};
   font-size: 14px;
@@ -117,6 +125,7 @@ const OutputSwapSection = styled(SwapSection)<{ showDetailsDropdown: boolean }>`
 `
 
 const DetailsSwapSection = styled(SwapSection)`
+  margin-top: 3px;
   padding: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -633,7 +642,7 @@ export function Swap({
               color={theme.textPrimary}
             >
               <ArrowDown
-                size="16"
+                size="26"
                 color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.textPrimary : theme.textTertiary}
               />
             </ArrowContainer>

@@ -14,11 +14,11 @@ import { ResponsiveTooltipContainer } from './styleds'
 import SwapRoute from './SwapRoute'
 
 const GasWrapper = styled(RowFixed)`
-  border-radius: 8px;
+  border-radius: 0;
   padding: 4px 6px;
   height: 24px;
-  color: ${({ theme }) => theme.textTertiary};
-  background-color: ${({ theme }) => theme.deprecated_bg1};
+  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.backgroundInteractive};
   font-size: 14px;
   font-weight: 500;
   user-select: none;
@@ -27,7 +27,7 @@ const StyledGasIcon = styled(GasIcon)`
   margin-right: 4px;
   height: 14px;
   & > * {
-    stroke: ${({ theme }) => theme.textTertiary};
+    stroke: ${({ theme }) => theme.white};
   }
 `
 
@@ -58,8 +58,8 @@ export default function GasEstimateBadge({
             origin="top right"
             style={{
               padding: showRoute ? '0' : '12px',
-              border: 'none',
-              borderRadius: showRoute ? '16px' : '12px',
+              // border: 'none',
+              borderRadius: 0, // showRoute ? '16px' : '12px'
               maxWidth: '400px',
             }}
           >

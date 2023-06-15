@@ -7,7 +7,7 @@ const zIndex = {
 }
 
 const fonts = {
-  fontFamily: 'Inter custom',
+  fontFamily: 'IBM Plex Mono',
 }
 
 export const LIGHT_THEME: Theme = {

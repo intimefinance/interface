@@ -1,20 +1,17 @@
 import { t } from '@lingui/macro'
 import { useAccountDrawer } from 'components/AccountDrawer'
 import Column from 'components/Column'
-import { LoadingBubble } from 'components/Tokens/loading'
 import { getYear, isSameDay, isSameMonth, isSameWeek, isSameYear } from 'date-fns'
-import { TransactionStatus, useTransactionListQuery } from 'graphql/data/__generated__/types-and-hooks'
-import { PollingInterval } from 'graphql/data/util'
+import { TransactionStatus } from 'graphql/data/__generated__/types-and-hooks'
 import { atom, useAtom } from 'jotai'
 import { EmptyWalletModule } from 'nft/components/profile/view/EmptyWalletContent'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
 
-import { PortfolioSkeleton, PortfolioTabWrapper } from '../PortfolioRow'
+import { PortfolioTabWrapper } from '../PortfolioRow'
 import { ActivityRow } from './ActivityRow'
 import { useLocalActivities } from './parseLocal'
-import { parseRemoteActivities } from './parseRemote'
 import { Activity, ActivityMap } from './types'
 
 interface ActivityGroup {
@@ -103,37 +100,39 @@ export function ActivityTab({ account }: { account: string }) {
 
   const localMap = useLocalActivities(account)
 
-  const { data, loading, refetch } = useTransactionListQuery({
-    variables: { account },
-    errorPolicy: 'all',
-    fetchPolicy: 'cache-first',
-  })
+  // const { data, loading, refetch } = useTransactionListQuery({
+  //   variables: { account },
+  //   errorPolicy: 'all',
+  //   fetchPolicy: 'cache-first',
+  // })
 
   // We only refetch remote activity if the user renavigates to the activity tab by changing tabs or opening the drawer
-  useEffect(() => {
-    const currentTime = Date.now()
-    if (!lastFetched) {
-      setLastFetched(currentTime)
-    } else if (drawerOpen && lastFetched && currentTime - lastFetched > PollingInterval.Slow) {
-      refetch()
-      setLastFetched(currentTime)
-    }
-  }, [drawerOpen, lastFetched, refetch, setLastFetched])
+  // useEffect(() => {
+  //   const currentTime = Date.now()
+  //   if (!lastFetched) {
+  //     setLastFetched(currentTime)
+  //   } else if (drawerOpen && lastFetched && currentTime - lastFetched > PollingInterval.Slow) {
+  //     refetch()
+  //     setLastFetched(currentTime)
+  //   }
+  // }, [drawerOpen, lastFetched, refetch, setLastFetched])
 
   const activityGroups = useMemo(() => {
-    const remoteMap = parseRemoteActivities(data?.portfolios?.[0].assetActivities)
-    const allActivities = combineActivities(localMap, remoteMap)
+    // const remoteMap = parseRemoteActivities(data?.portfolios?.[0].assetActivities)
+    // const allActivities = combineActivities(localMap, remoteMap)
+    const allActivities = combineActivities(localMap)
     return createGroups(allActivities)
-  }, [data?.portfolios, localMap])
+  }, [localMap]) // [data?.portfolios, localMap]
 
-  if (!data && loading)
-    return (
-      <>
-        <LoadingBubble height="16px" width="80px" margin="16px 16px 8px" />
-        <PortfolioSkeleton shrinkRight />
-      </>
-    )
-  else if (activityGroups.length === 0) {
+  // if (!data && loading)
+  //   return (
+  //     <>
+  //       <LoadingBubble height="16px" width="80px" margin="16px 16px 8px" />
+  //       <PortfolioSkeleton shrinkRight />
+  //     </>
+  //   )
+  // else
+  if (activityGroups.length === 0) {
     return <EmptyWalletModule type="activity" onNavigateClick={toggleWalletDrawer} />
   } else {
     return (

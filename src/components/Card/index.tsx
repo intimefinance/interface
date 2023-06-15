@@ -1,17 +1,24 @@
 import { Box } from 'rebass/styled-components'
 import styled from 'styled-components/macro'
 
-const Card = styled(Box)<{ width?: string; padding?: string; border?: string; $borderRadius?: string }>`
+const Card = styled(Box)<{
+  width?: string
+  padding?: string
+  border?: string
+  $borderRadius?: string
+  $backgroundColor?: string
+}>`
   width: ${({ width }) => width ?? '100%'};
   padding: ${({ padding }) => padding ?? '1rem'};
-  border-radius: ${({ $borderRadius }) => $borderRadius ?? '16px'};
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? '0px'};
   border: ${({ border }) => border};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? 'none'};
 `
 export default Card
 
 export const LightCard = styled(Card)`
   border: 1px solid ${({ theme }) => theme.backgroundInteractive};
-  background-color: ${({ theme }) => theme.deprecated_bg1};
+  background-color: ${({ theme, $backgroundColor }) => $backgroundColor ?? theme.backgroundInteractive};
 `
 
 export const GrayCard = styled(Card)`
@@ -23,11 +30,12 @@ export const DarkGrayCard = styled(Card)`
 `
 
 export const DarkCard = styled(Card)`
+  border: 1px solid ${({ theme }) => theme.backgroundInteractive};
   background-color: ${({ theme }) => theme.backgroundSurface};
 `
 
 export const OutlineCard = styled(Card)`
-  border: 1px solid ${({ theme }) => theme.deprecated_bg3};
+  border: 1px solid ${({ theme }) => theme.backgroundInteractive};
 `
 
 export const YellowCard = styled(Card)`
@@ -37,7 +45,7 @@ export const YellowCard = styled(Card)`
 `
 
 export const BlueCard = styled(Card)`
-  background-color: ${({ theme }) => theme.deprecated_primary5};
+  background-color: ${({ theme }) => theme.backgroundLight};
   color: ${({ theme }) => theme.accentAction};
-  border-radius: 12px;
+  border-radius: 0;
 `

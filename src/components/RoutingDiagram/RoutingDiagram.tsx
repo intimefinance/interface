@@ -37,6 +37,9 @@ const RouteRow = styled(Row)`
 const PoolBadge = styled(Badge)`
   display: flex;
   padding: 4px 4px;
+  background-color: ${({ theme }) => theme.accentAction};
+  border-radius: 0;
+  color: ${({ theme }) => theme.textPrimary};
 `
 
 const DottedLine = styled.div`
@@ -55,8 +58,9 @@ const DotColor = styled(DotLine)`
 `
 
 const OpaqueBadge = styled(Badge)`
-  background-color: ${({ theme }) => theme.backgroundInteractive};
-  border-radius: 8px;
+  background-color: ${({ theme }) => theme.accentAction};
+  border-radius: 0;
+  color: ${({ theme }) => theme.textPrimary};
   display: grid;
   font-size: 12px;
   grid-gap: 4px;
@@ -67,9 +71,9 @@ const OpaqueBadge = styled(Badge)`
 `
 
 const ProtocolBadge = styled(Badge)`
-  background-color: ${({ theme }) => theme.deprecated_bg3};
-  border-radius: 4px;
-  color: ${({ theme }) => theme.textSecondary};
+  background-color: ${({ theme }) => theme.backgroundInteractive};
+  border-radius: 0px;
+  color: ${({ theme }) => theme.textPrimary};
   font-size: 10px;
   padding: 2px 4px;
   z-index: ${Z_INDEX.sticky + 1};

@@ -3,6 +3,10 @@ import { lighten } from 'polished'
 import styled from 'styled-components/macro'
 
 /* Loading state bubbles (animation style from: src/components/Loader/styled.tsx) */
+/**
+ * border-radius: 12px;
+ * border-radius: ${({ round }) => (round ? '50%' : '12px')};
+ */
 export const LoadingBubble = styled.div<{
   height?: string
   width?: string
@@ -10,8 +14,6 @@ export const LoadingBubble = styled.div<{
   delay?: string
   margin?: string
 }>`
-  border-radius: 12px;
-  border-radius: ${({ round }) => (round ? '50%' : '12px')};
   ${({ margin }) => margin && `margin: ${margin}`};
   height: ${({ height }) => height ?? '24px'};
   width: 50%;

@@ -3,7 +3,7 @@ import { sendAnalyticsEvent, TraceEvent } from '@uniswap/analytics'
 import { BrowserEvent, InterfaceElementName, InterfaceEventName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 import PortfolioDrawer, { useAccountDrawer } from 'components/AccountDrawer'
-import PrefetchBalancesWrapper from 'components/AccountDrawer/PrefetchBalancesWrapper'
+// import PrefetchBalancesWrapper from 'components/AccountDrawer/PrefetchBalancesWrapper'
 import Loader from 'components/Icons/LoadingSpinner'
 import { IconWrapper } from 'components/Identicon/StatusIcon'
 import { useGetConnection } from 'connection'
@@ -25,14 +25,16 @@ import StatusIcon from '../Identicon/StatusIcon'
 import { RowBetween } from '../Row'
 
 // https://stackoverflow.com/a/31617326
-const FULL_BORDER_RADIUS = 9999
+// const FULL_BORDER_RADIUS = 9999
 
+/**
+ * border-radius: ${FULL_BORDER_RADIUS}px;
+ */
 const Web3StatusGeneric = styled(ButtonSecondary)`
   ${flexRowNoWrap};
   width: 100%;
   align-items: center;
   padding: 0.5rem;
-  border-radius: ${FULL_BORDER_RADIUS}px;
   cursor: pointer;
   user-select: none;
   height: 36px;
@@ -53,11 +55,13 @@ const Web3StatusError = styled(Web3StatusGeneric)`
   }
 `
 
+/**
+ * border-radius: ${FULL_BORDER_RADIUS}px;
+ */
 const Web3StatusConnectWrapper = styled.div<{ faded?: boolean }>`
   ${flexRowNoWrap};
   align-items: center;
   background-color: ${({ theme }) => theme.accentActionSoft};
-  border-radius: ${FULL_BORDER_RADIUS}px;
   border: none;
   padding: 0;
   height: 40px;
@@ -79,14 +83,14 @@ const Web3StatusConnected = styled(Web3StatusGeneric)<{
   pending?: boolean
   isClaimAvailable?: boolean
 }>`
-  background-color: ${({ pending, theme }) => (pending ? theme.accentAction : theme.deprecated_bg1)};
+  background-color: ${({ pending, theme }) => (pending ? theme.accentAction : theme.backgroundLight)};
   border: 1px solid ${({ pending, theme }) => (pending ? theme.accentAction : theme.deprecated_bg1)};
   color: ${({ pending, theme }) => (pending ? theme.white : theme.textPrimary)};
   font-weight: 500;
   border: ${({ isClaimAvailable }) => isClaimAvailable && `1px solid ${colors.purple300}`};
   :hover,
   :focus {
-    border: 1px solid ${({ theme }) => darken(0.05, theme.deprecated_bg3)};
+    border: 1px solid ${({ theme }) => darken(0.05, theme.backgroundInteractive)};
 
     :focus {
       border: 1px solid
@@ -135,11 +139,13 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
 }
 
+/**
+ * border-top-left-radius: ${FULL_BORDER_RADIUS}px;
+ * border-bottom-left-radius: ${FULL_BORDER_RADIUS}px;
+ */
 const StyledConnectButton = styled.button`
   background-color: transparent;
   border: none;
-  border-top-left-radius: ${FULL_BORDER_RADIUS}px;
-  border-bottom-left-radius: ${FULL_BORDER_RADIUS}px;
   cursor: pointer;
   font-weight: 600;
   font-size: 16px;
@@ -235,11 +241,11 @@ function Web3StatusInner() {
 
 export default function Web3Status() {
   return (
-    <PrefetchBalancesWrapper>
+    <>
       <Web3StatusInner />
       <Portal>
         <PortfolioDrawer />
       </Portal>
-    </PrefetchBalancesWrapper>
+    </>
   )
 }

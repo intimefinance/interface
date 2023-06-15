@@ -27,7 +27,7 @@ const StyledMenuIcon = styled(Settings)`
   width: 20px;
 
   > * {
-    stroke: ${({ theme }) => theme.textSecondary};
+    stroke: ${({ theme }) => theme.iconColor};
   }
 `
 
@@ -82,13 +82,15 @@ const StyledMenu = styled.div`
   text-align: left;
 `
 
+/**
+ * border-radius: 12px;
+ */
 const MenuFlyout = styled.span`
   min-width: 20.125rem;
-  background-color: ${({ theme }) => theme.backgroundSurface};
+  background-color: ${({ theme }) => theme.background};
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
-    0px 24px 32px rgba(0, 0, 0, 0.01);
-  border-radius: 12px;
+  box-shadow: 0px 0px 1px rgba(255, 255, 255, 0.01), 0px 4px 8px rgba(255, 255, 255, 0.04),
+    0px 16px 24px rgba(255, 255, 255, 0.04), 0px 24px 32px rgba(255, 255, 255, 0.01);
   display: flex;
   flex-direction: column;
   font-size: 1rem;
@@ -108,16 +110,19 @@ const MenuFlyout = styled.span`
 const Break = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${({ theme }) => theme.deprecated_bg3};
+  background-color: ${({ theme }) => theme.backgroundInteractive};
 `
 
+/**
+ * border-radius: 20px;
+ */
 const ModalContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
-  background-color: ${({ theme }) => theme.backgroundInteractive};
-  border-radius: 20px;
+  background-color: ${({ theme }) => theme.background};
+  border: 1px solid ${({ theme }) => theme.backgroundInteractive};
 `
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage: Percent }) {
@@ -212,7 +217,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                   <ThemedText.DeprecatedBlack fontWeight={400} fontSize={14} color={theme.textSecondary}>
                     <Trans>Auto Router API</Trans>
                   </ThemedText.DeprecatedBlack>
-                  <QuestionHelper text={<Trans>Use the Uniswap Labs API to get faster quotes.</Trans>} />
+                  {/* <QuestionHelper text={<Trans>Use the Uniswap Labs API to get faster quotes.</Trans>} /> */}
                 </RowFixed>
                 <Toggle
                   id="toggle-optimized-router-button"

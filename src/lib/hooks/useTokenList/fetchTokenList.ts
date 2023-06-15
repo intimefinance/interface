@@ -1,10 +1,7 @@
 import type { TokenList } from '@uniswap/token-lists'
-import { validateTokenList } from '@uniswap/widgets'
 import contenthashToUri from 'lib/utils/contenthashToUri'
 import parseENSAddress from 'lib/utils/parseENSAddress'
 import uriToHttp from 'lib/utils/uriToHttp'
-
-export const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
 const listCache = new Map<string, TokenList>()
 
@@ -71,7 +68,7 @@ export default async function fetchTokenList(
       // The content of the result is sometimes invalid even with a 200 status code.
       // A response can be invalid if it's not a valid JSON or if it doesn't match the TokenList schema.
       const json = await response.json()
-      const list = skipValidation ? json : await validateTokenList(json)
+      const list = json //skipValidation ? json : await validateTokenList(json);
       listCache?.set(listUrl, list)
       return list
     } catch (error) {

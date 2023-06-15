@@ -474,7 +474,7 @@ function AddLiquidity() {
 
   const Buttons = () =>
     addIsUnsupported ? (
-      <ButtonPrimary disabled={true} $borderRadius="12px" padding="12px">
+      <ButtonPrimary disabled={true} $borderRadius="0" padding="12px">
         <ThemedText.DeprecatedMain mb="4px">
           <Trans>Unsupported Asset</Trans>
         </ThemedText.DeprecatedMain>
@@ -486,7 +486,7 @@ function AddLiquidity() {
         properties={{ received_swap_quote: false }}
         element={InterfaceElementName.CONNECT_WALLET_BUTTON}
       >
-        <ButtonLight onClick={toggleWalletDrawer} $borderRadius="12px" padding="12px">
+        <ButtonLight onClick={toggleWalletDrawer} $borderRadius="0" padding="12px">
           <Trans>Connect Wallet</Trans>
         </ButtonLight>
       </TraceEvent>
@@ -708,7 +708,6 @@ function AddLiquidity() {
                     <ThemedText.DeprecatedLabel>
                       {hasExistingPosition ? <Trans>Add more liquidity</Trans> : <Trans>Deposit Amounts</Trans>}
                     </ThemedText.DeprecatedLabel>
-
                     <CurrencyInputPanel
                       value={formattedAmounts[Field.CURRENCY_A]}
                       onUserInput={onFieldAInput}
@@ -722,7 +721,6 @@ function AddLiquidity() {
                       showCommonBases
                       locked={depositADisabled}
                     />
-
                     <CurrencyInputPanel
                       value={formattedAmounts[Field.CURRENCY_B]}
                       onUserInput={onFieldBInput}
@@ -837,7 +835,7 @@ function AddLiquidity() {
                             />
                           </OutlineCard>
                           <RowBetween
-                            style={{ backgroundColor: theme.deprecated_bg1, padding: '12px', borderRadius: '12px' }}
+                            style={{ backgroundColor: theme.backgroundLight, padding: '12px', borderRadius: '0' }}
                           >
                             <ThemedText.DeprecatedMain>
                               <Trans>Current {baseCurrency?.symbol} Price:</Trans>
@@ -894,9 +892,8 @@ function AddLiquidity() {
                           </AutoColumn>
                         </StackedItem>
                       </StackedContainer>
-
                       {outOfRange ? (
-                        <YellowCard padding="8px 12px" $borderRadius="12px">
+                        <YellowCard padding="8px 12px" $borderRadius="0">
                           <RowBetween>
                             <AlertTriangle stroke={theme.deprecated_yellow3} size="16px" />
                             <ThemedText.DeprecatedYellow ml="12px" fontSize="12px">
@@ -908,9 +905,8 @@ function AddLiquidity() {
                           </RowBetween>
                         </YellowCard>
                       ) : null}
-
                       {invalidRange ? (
-                        <YellowCard padding="8px 12px" $borderRadius="12px">
+                        <YellowCard padding="8px 12px" $borderRadius="0">
                           <RowBetween>
                             <AlertTriangle stroke={theme.deprecated_yellow3} size="16px" />
                             <ThemedText.DeprecatedYellow ml="12px" fontSize="12px">

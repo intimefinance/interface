@@ -32,11 +32,17 @@ function getRouter(chainId: ChainId): AlphaRouter {
 }
 
 // routing API quote params: https://github.com/Uniswap/routing-api/blob/main/lib/handlers/quote/schema/quote-schema.ts
+// const API_QUERY_PARAMS = {
+//   protocols: 'v2,v3,mixed',
+// }
+// const CLIENT_PARAMS = {
+//   protocols: [Protocol.V2, Protocol.V3, Protocol.MIXED],
+// }
 const API_QUERY_PARAMS = {
-  protocols: 'v2,v3,mixed',
+  protocols: 'v3',
 }
 const CLIENT_PARAMS = {
-  protocols: [Protocol.V2, Protocol.V3, Protocol.MIXED],
+  protocols: [Protocol.V3],
 }
 // Price queries are tuned down to minimize the required RPCs to respond to them.
 // TODO(zzmp): This will be used after testing router caching.
@@ -82,7 +88,7 @@ interface GetQuoteArgs {
 export const routingApi = createApi({
   reducerPath: 'routingApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.uniswap.org/v1/',
+    baseUrl: 'https://ghrbl4xdk1.execute-api.us-east-1.amazonaws.com/prod/',
   }),
   endpoints: (build) => ({
     getQuote: build.query<GetQuoteResult, GetQuoteArgs>({
@@ -143,6 +149,7 @@ export const routingApi = createApi({
         } catch (error) {
           // TODO: fall back to client-side quoter when auto router fails.
           // deprecate 'legacy' v2/v3 routers first.
+          // console.log('error', error)
           return { error: { status: 'CUSTOM_ERROR', error: error.toString() } }
         }
       },

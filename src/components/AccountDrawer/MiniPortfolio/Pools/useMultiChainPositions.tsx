@@ -10,11 +10,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { PositionDetails } from 'types/position'
 import { NonfungiblePositionManager, UniswapInterfaceMulticall } from 'types/v3'
 import { UniswapV3PoolInterface } from 'types/v3/UniswapV3Pool'
-import { currencyKey } from 'utils/currencyKey'
 
 import { PositionInfo, useCachedPositions, useGetCachedTokens, usePoolAddressCache } from './cache'
 import { Call, DEFAULT_GAS_LIMIT } from './getTokensAsync'
-import { useInterfaceMulticallContracts, usePoolPriceMap, useV3ManagerContracts } from './hooks'
+import { useInterfaceMulticallContracts, useV3ManagerContracts } from './hooks'
 
 function createPositionInfo(
   owner: string,
@@ -41,13 +40,7 @@ type FeeAmounts = [BigNumber, BigNumber]
 
 const MAX_UINT128 = BigNumber.from(2).pow(128).sub(1)
 
-const DEFAULT_CHAINS = [
-  SupportedChainId.MAINNET,
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.POLYGON,
-  SupportedChainId.CELO,
-]
+const DEFAULT_CHAINS = [SupportedChainId.CORE_TEST]
 
 type UseMultiChainPositionsData = { positions: PositionInfo[] | undefined; loading: boolean }
 
@@ -74,7 +67,7 @@ export default function useMultiChainPositions(account: string, chains = DEFAULT
 
   const [feeMap, setFeeMap] = useState<{ [key: string]: FeeAmounts }>({})
 
-  const { priceMap, pricesLoading } = usePoolPriceMap(positions)
+  // const { priceMap, pricesLoading } = usePoolPriceMap(positions)
 
   const fetchPositionFees = useCallback(
     async (pm: NonfungiblePositionManager, positionIds: BigNumber[], chainId: number) => {
@@ -216,11 +209,11 @@ export default function useMultiChainPositions(account: string, chains = DEFAULT
               parseFloat(CurrencyAmount.fromRawAmount(position.pool.token1, feeMap[key]?.[1].toString()).toExact()),
             ]
           : undefined
-        const prices = [priceMap[currencyKey(position.pool.token0)], priceMap[currencyKey(position.pool.token1)]]
+        const prices = [0, 0]
         return { ...position, fees, prices } as PositionInfo
       }),
-    [feeMap, positions, priceMap]
+    [feeMap, positions]
   )
 
-  return { positions: positionsWithFeesAndPrices, loading: pricesLoading || positionsLoading }
+  return { positions: positionsWithFeesAndPrices, loading: positionsLoading }
 }

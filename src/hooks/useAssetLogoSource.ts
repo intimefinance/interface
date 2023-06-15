@@ -40,7 +40,7 @@ function getInitialUrl(address?: string | null, chainId?: number | null, isNativ
   const networkName = chainId ? chainIdToNetworkName(chainId) : 'ethereum'
   const checksummedAddress = isAddress(address)
   if (checksummedAddress) {
-    return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    return `${process.env.REACT_APP_BASE_LOGO_URL}/${networkName}/${checksummedAddress}/logo.png`
   } else {
     return undefined
   }

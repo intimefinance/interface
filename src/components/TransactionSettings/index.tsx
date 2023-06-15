@@ -4,7 +4,6 @@ import { useWeb3React } from '@web3-react/core'
 import { L2_CHAIN_IDS } from 'constants/chains'
 import { DEFAULT_DEADLINE_FROM_NOW } from 'constants/misc'
 import ms from 'ms.macro'
-import { darken } from 'polished'
 import { useState } from 'react'
 import { useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks'
 import styled, { useTheme } from 'styled-components/macro'
@@ -43,7 +42,8 @@ const FancyButton = styled.button`
 
 const Option = styled(FancyButton)<{ active: boolean }>`
   margin-right: 8px;
-  border-radius: 12px;
+  border-radius: 0;
+  border-color: ${({ theme }) => theme.backgroundOutline};
   :hover {
     cursor: pointer;
   }
@@ -52,9 +52,9 @@ const Option = styled(FancyButton)<{ active: boolean }>`
 `
 
 const Input = styled.input`
-  background: ${({ theme }) => theme.deprecated_bg1};
+  background: none;
   font-size: 16px;
-  border-radius: 12px;
+  border-radius: 0;
   width: auto;
   outline: none;
   &::-webkit-outer-spin-button,
@@ -69,13 +69,8 @@ const Input = styled.input`
   }
 `
 
-const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }>`
-  height: 2rem;
-  position: relative;
-  padding: 0 0.75rem;
-  border-radius: 12px;
-  flex: 1;
-  border: ${({ theme, active, warning }) =>
+/**
+ *   border: ${({ theme, active, warning }) =>
     active
       ? `1px solid ${warning ? theme.accentFailure : theme.accentAction}`
       : warning && `1px solid ${theme.accentFailure}`};
@@ -83,12 +78,27 @@ const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }
     border: ${({ theme, active, warning }) =>
       active && `1px solid ${warning ? darken(0.1, theme.accentFailure) : darken(0.1, theme.accentAction)}`};
   }
+ */
+const OptionCustom = styled(FancyButton)<{
+  active?: boolean
+  warning?: boolean
+}>`
+  height: 2rem;
+  position: relative;
+  padding: 0 0.75rem;
+  border-radius: 0;
+  flex: 1;
+  background: ${({ theme }) => theme.backgroundOutline};
+  border: none;
+  :hover {
+    border: none;
+  }
 
   input {
     width: 100%;
     height: 100%;
     border: 0px;
-    border-radius: 2rem;
+    border-radius: 0;
   }
 `
 

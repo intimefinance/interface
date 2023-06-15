@@ -5,7 +5,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
 import { ButtonGray, ButtonPrimary, ButtonText } from 'components/Button'
 import { AutoColumn } from 'components/Column'
-import { FlyoutAlignment, Menu } from 'components/Menu'
+import { Menu } from 'components/Menu'
 import PositionList from 'components/PositionList'
 import { RowBetween, RowFixed } from 'components/Row'
 import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
@@ -13,15 +13,14 @@ import { isSupportedChain } from 'constants/chains'
 import { useFilterPossiblyMaliciousPositions } from 'hooks/useFilterPossiblyMaliciousPositions'
 import { useV3Positions } from 'hooks/useV3Positions'
 import { useMemo } from 'react'
-import { AlertTriangle, BookOpen, ChevronDown, ChevronsRight, Inbox, Layers } from 'react-feather'
+import { AlertTriangle, BookOpen, ChevronsRight, Inbox, Layers } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { useUserHideClosedPositions } from 'state/user/hooks'
 import styled, { css, useTheme } from 'styled-components/macro'
-import { HideSmall, ThemedText } from 'theme'
+import { ThemedText } from 'theme'
 import { PositionDetails } from 'types/position'
 
 import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
-import CTACards from './CTACards'
 import { LoadingRows } from './styleds'
 
 const PageWrapper = styled(AutoColumn)`
@@ -123,7 +122,7 @@ const InboxIcon = styled(Inbox)`
 `
 
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 16px;
   padding: 6px 8px;
   width: fit-content;
@@ -134,10 +133,10 @@ const ResponsiveButtonPrimary = styled(ButtonPrimary)`
 `
 
 const MainContentWrapper = styled.main`
-  background-color: ${({ theme }) => theme.backgroundSurface};
+  background-color: ${({ theme }) => theme.background};
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
   padding: 0;
-  border-radius: 16px;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
@@ -269,7 +268,7 @@ export default function Pool() {
                 <Trans>Pools</Trans>
               </ThemedText.LargeHeader>
               <ButtonRow>
-                {showV2Features && (
+                {/* {showV2Features && (
                   <PoolMenu
                     menuItems={menuItems}
                     flyoutAlignment={FlyoutAlignment.LEFT}
@@ -282,7 +281,7 @@ export default function Pool() {
                       </MoreOptionsButton>
                     )}
                   />
-                )}
+                )} */}
                 <ResponsiveButtonPrimary data-cy="join-pool-button" id="join-pool-button" as={Link} to="/add/ETH">
                   + <Trans>New Position</Trans>
                 </ResponsiveButtonPrimary>
@@ -308,7 +307,11 @@ export default function Pool() {
                   </ThemedText.DeprecatedBody>
                   {!showConnectAWallet && closedPositions.length > 0 && (
                     <ButtonText
-                      style={{ marginTop: '.5rem' }}
+                      style={{
+                        color: '#EB6C22',
+                        marginTop: '.5rem',
+                        marginBottom: '.5rem',
+                      }}
                       onClick={() => setUserHideClosedPositions(!userHideClosedPositions)}
                     >
                       <Trans>Show closed positions</Trans>
@@ -322,7 +325,11 @@ export default function Pool() {
                       element={InterfaceElementName.CONNECT_WALLET_BUTTON}
                     >
                       <ButtonPrimary
-                        style={{ marginTop: '2em', marginBottom: '2em', padding: '8px 16px' }}
+                        style={{
+                          marginTop: '2em',
+                          marginBottom: '2em',
+                          padding: '8px 16px',
+                        }}
                         onClick={toggleWalletDrawer}
                       >
                         <Trans>Connect a wallet</Trans>
@@ -332,9 +339,9 @@ export default function Pool() {
                 </ErrorContainer>
               )}
             </MainContentWrapper>
-            <HideSmall>
+            {/* <HideSmall>
               <CTACards />
-            </HideSmall>
+            </HideSmall> */}
           </AutoColumn>
         </AutoColumn>
       </PageWrapper>

@@ -5,7 +5,7 @@ import { SupportedChainId } from 'constants/chains'
  * @param chainId a chain ID, which will be returned if it is a supported chain ID
  */
 export function supportedChainId(chainId: number | null | undefined): SupportedChainId | undefined {
-  if (typeof chainId === 'number' && chainId in SupportedChainId) {
+  if (typeof chainId === 'number' && chainId === SupportedChainId.CORE_TEST) {
     return chainId
   }
   return undefined

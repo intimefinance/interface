@@ -62,12 +62,12 @@ const baseMenuItem = style([
     paddingY: '8',
     paddingX: '14',
     marginY: '4',
-    borderRadius: '12',
+    borderRadius: '0',
     transition: '250',
     height: 'min',
     width: 'full',
     textAlign: 'center',
-    display: 'flex',
+    display: 'block',
     alignItems: 'center',
     gap: '4',
   }),
@@ -75,7 +75,8 @@ const baseMenuItem = style([
     lineHeight: '24px',
     textDecoration: 'none',
     ':hover': {
-      background: vars.color.lightGrayOverlay,
+      color: vars.color.white,
+      // background: vars.color.lightGrayOverlay,
     },
   },
 ])
@@ -91,6 +92,6 @@ export const activeMenuItem = style([
   baseMenuItem,
   sprinkles({
     color: 'textPrimary',
-    background: 'backgroundFloating',
+    background: 'lightGrayOverlay',
   }),
 ])

@@ -1,13 +1,14 @@
-import { NetworkStatus } from '@apollo/client'
+// import { NetworkStatus } from '@apollo/client'
 import { Currency, CurrencyAmount, Price, SupportedChainId, TradeType } from '@uniswap/sdk-core'
 import { nativeOnChain } from 'constants/tokens'
-import { Chain, useTokenSpotPriceQuery } from 'graphql/data/__generated__/types-and-hooks'
-import { chainIdToBackendName, isGqlSupportedChain, PollingInterval } from 'graphql/data/util'
+// import { Chain, useTokenSpotPriceQuery } from 'graphql/data/__generated__/types-and-hooks'
+// import { chainIdToBackendName, isGqlSupportedChain, PollingInterval } from 'graphql/data/util'
+import { isGqlSupportedChain } from 'graphql/data/util'
 import { RouterPreference } from 'state/routing/slice'
 import { TradeState } from 'state/routing/types'
 import { useRoutingAPITrade } from 'state/routing/useRoutingAPITrade'
-import { getNativeTokenDBAddress } from 'utils/nativeTokens'
 
+// import { getNativeTokenDBAddress } from 'utils/nativeTokens'
 import useStablecoinPrice from './useStablecoinPrice'
 
 // ETH amounts used when calculating spot price for a given currency.
@@ -54,29 +55,32 @@ export function useUSDPrice(currencyAmount?: CurrencyAmount<Currency>): {
   data: number | undefined
   isLoading: boolean
 } {
-  const chain = currencyAmount?.currency.chainId ? chainIdToBackendName(currencyAmount?.currency.chainId) : undefined
+  // const chain = currencyAmount?.currency.chainId ? chainIdToBackendName(currencyAmount?.currency.chainId) : undefined
   const currency = currencyAmount?.currency
-  const { data: ethValue, isLoading: isEthValueLoading } = useETHValue(currencyAmount)
+  // const { data: ethValue, isLoading: isEthValueLoading } = useETHValue(currencyAmount)
 
-  const { data, networkStatus } = useTokenSpotPriceQuery({
-    variables: { chain: chain ?? Chain.Ethereum, address: getNativeTokenDBAddress(chain ?? Chain.Ethereum) },
-    skip: !chain || !isGqlSupportedChain(currency?.chainId),
-    pollInterval: PollingInterval.Normal,
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-first',
-  })
+  // const { data, networkStatus } = useTokenSpotPriceQuery({
+  //   variables: { chain: chain ?? Chain.Ethereum, address: getNativeTokenDBAddress(chain ?? Chain.Ethereum) },
+  //   skip: !chain || !isGqlSupportedChain(currency?.chainId),
+  //   pollInterval: PollingInterval.Normal,
+  //   notifyOnNetworkStatusChange: true,
+  //   fetchPolicy: 'cache-first',
+  // })
 
   // Use USDC price for chains not supported by backend yet
   const stablecoinPrice = useStablecoinPrice(!isGqlSupportedChain(currency?.chainId) ? currency : undefined)
-  if (!isGqlSupportedChain(currency?.chainId) && currencyAmount && stablecoinPrice) {
-    return { data: parseFloat(stablecoinPrice.quote(currencyAmount).toSignificant()), isLoading: false }
+  // if (!isGqlSupportedChain(currency?.chainId) && currencyAmount && stablecoinPrice) {
+  return {
+    data: stablecoinPrice && currencyAmount && parseFloat(stablecoinPrice.quote(currencyAmount).toSignificant()),
+    isLoading: false,
   }
+  // }
 
-  const isFirstLoad = networkStatus === NetworkStatus.loading
+  // const isFirstLoad = networkStatus === NetworkStatus.loading
 
   // Otherwise, get the price of the token in ETH, and then multiple by the price of ETH
-  const ethUSDPrice = data?.token?.project?.markets?.[0]?.price?.value
-  if (!ethUSDPrice || !ethValue) return { data: undefined, isLoading: isEthValueLoading || isFirstLoad }
+  // const ethUSDPrice = data?.token?.project?.markets?.[0]?.price?.value
+  // if (!ethUSDPrice || !ethValue) return { data: undefined, isLoading: isEthValueLoading || isFirstLoad }
 
-  return { data: parseFloat(ethValue.toExact()) * ethUSDPrice, isLoading: false }
+  // return { data: parseFloat(ethValue.toExact()) * ethUSDPrice, isLoading: false }
 }

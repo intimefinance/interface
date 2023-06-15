@@ -3,7 +3,11 @@ import { opacify } from './utils'
 
 export const colors = {
   white: '#FFFFFF',
+  white50: '#D9D9D9',
+  white100: '#CCCCCC',
   black: '#000000',
+  black50: '#101010',
+  black100: '#030303',
   gray50: '#F5F6FC',
   gray100: '#E8ECFB',
   gray150: '#D2D9EE',
@@ -82,6 +86,7 @@ export const colors = {
   blue800: '#0B193F',
   blue900: '#040E34',
   blueVibrant: '#587BFF',
+  orange400: '#EB6C22',
   // TODO: add magenta 50-900
   magenta300: '#FD82FF',
   magentaVibrant: '#FC72FF',
@@ -135,29 +140,33 @@ export const darkTheme = {
 
   userThemeColor: colors.magentaVibrant,
 
-  background: colors.gray800,
+  background: colors.black50,
+  backgroundReverse: colors.white50,
   backgroundBackdrop: colors.gray950,
-  backgroundSurface: colors.gray900,
-  backgroundModule: colors.gray800,
-  backgroundInteractive: colors.gray700,
+  backgroundSurface: opacify(70, colors.black100),
+  backgroundModule: opacify(25, colors.white),
+  backgroundInteractive: opacify(25, colors.white50),
   backgroundFloating: opacify(12, colors.black),
-  backgroundOutline: opacify(24, colors.gray300),
+  backgroundOutline: opacify(25, colors.white),
   backgroundScrim: opacify(72, colors.gray900),
   backgroundScrolledSurface: opacify(72, colors.gray900),
+  backgroundLight: opacify(5, colors.white100),
+
+  iconColor: opacify(25, colors.white),
 
   textPrimary: colors.white,
-  textSecondary: colors.gray300,
-  textTertiary: colors.gray500,
+  textSecondary: opacify(50, colors.white),
+  textTertiary: opacify(25, colors.white),
 
-  accentAction: colors.blue400,
-  accentActive: colors.blue400,
+  accentAction: colors.orange400,
+  accentActive: colors.orange400,
   accentSuccess: colors.green200,
   accentWarning: colors.gold200,
   accentFailure: colors.red300,
   accentCritical: colors.red300,
 
-  accentActionSoft: opacify(24, colors.blue400),
-  accentActiveSoft: opacify(24, colors.blue400),
+  accentActionSoft: opacify(24, colors.orange400),
+  accentActiveSoft: opacify(24, colors.orange400),
   accentSuccessSoft: opacify(24, colors.green400),
   accentWarningSoft: opacify(24, colors.gold200),
   accentFailureSoft: opacify(12, colors.red300),
@@ -175,8 +184,8 @@ export const darkTheme = {
 
   networkDefaultShadow: `0px 40px 120px ${opacify(16, colors.blue400)}`,
 
-  stateOverlayHover: opacify(8, colors.gray300),
-  stateOverlayPressed: opacify(24, colors.gray200),
+  stateOverlayHover: opacify(40, colors.white),
+  stateOverlayPressed: opacify(80, colors.white),
 
   searchBackground: `rgba(255,255,255,0.07)`,
   searchOutline: `rgba(255,255,255,0.07)`,
@@ -188,6 +197,7 @@ export const lightTheme: Theme = {
   userThemeColor: colors.magentaVibrant,
 
   background: '#faf9fa', //INTENTIONALLY OFF THEME TO GIVE WHITE BG A SOFTER VISUAL
+  backgroundReverse: colors.black50,
   backgroundBackdrop: colors.white,
   backgroundSurface: colors.white,
   backgroundModule: colors.gray50,
@@ -196,6 +206,9 @@ export const lightTheme: Theme = {
   backgroundOutline: colors.gray150,
   backgroundScrim: opacify(60, colors.gray900),
   backgroundScrolledSurface: opacify(72, colors.white),
+  backgroundLight: opacify(5, colors.black100),
+
+  iconColor: colors.gray400,
 
   textPrimary: colors.gray900,
   textSecondary: colors.gray400,

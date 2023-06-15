@@ -1,7 +1,9 @@
 import defaultTokenList from '@uniswap/default-token-list'
 import fetch from 'jest-fetch-mock'
 
-import fetchTokenList, { DEFAULT_TOKEN_LIST } from './fetchTokenList'
+import fetchTokenList from './fetchTokenList'
+
+const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
 fetch.enableMocks()
 

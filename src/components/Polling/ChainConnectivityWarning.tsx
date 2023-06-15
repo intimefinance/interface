@@ -33,9 +33,12 @@ const TitleText = styled.div`
   line-height: 24px;
   margin: 0px 12px;
 `
+
+/**
+ * border-radius: 12px;
+ */
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.backgroundSurface};
-  border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
   bottom: 60px;
   display: none;
@@ -43,6 +46,7 @@ const Wrapper = styled.div`
   padding: 16px 20px;
   position: fixed;
   right: 16px;
+  z-index: 999;
   @media screen and (min-width: ${MEDIA_WIDTHS.deprecated_upToMedium}px) {
     display: block;
   }

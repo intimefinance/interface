@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { AlertTriangle, ArrowDown } from 'react-feather'
 import { Text } from 'rebass'
 import { InterfaceTrade } from 'state/routing/types'
-import styled, { useTheme } from 'styled-components/macro'
+import { useTheme } from 'styled-components/macro'
 
 import { ThemedText } from '../../theme'
 import { isAddress, shortenAddress } from '../../utils'
@@ -21,25 +21,25 @@ import CurrencyLogo from '../Logo/CurrencyLogo'
 import { RowBetween, RowFixed } from '../Row'
 import TradePrice from '../swap/TradePrice'
 import { AdvancedSwapDetails } from './AdvancedSwapDetails'
-import { SwapShowAcceptChanges, TruncatedText } from './styleds'
+import { ArrowContainer, ArrowWrapper, SwapShowAcceptChanges, TruncatedText } from './styleds'
 
-const ArrowWrapper = styled.div`
-  padding: 4px;
-  border-radius: 12px;
-  height: 40px;
-  width: 40px;
-  position: relative;
-  margin-top: -18px;
-  margin-bottom: -18px;
-  left: calc(50% - 16px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.backgroundSurface};
-  border: 4px solid;
-  border-color: ${({ theme }) => theme.backgroundModule};
-  z-index: 2;
-`
+// const ArrowWrapper = styled.div`
+//   padding: 4px;
+//   border-radius: 12px;
+//   height: 40px;
+//   width: 40px;
+//   position: relative;
+//   margin-top: -18px;
+//   margin-bottom: -18px;
+//   left: calc(50% - 16px);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: ${({ theme }) => theme.backgroundSurface};
+//   border: 4px solid;
+//   border-color: ${({ theme }) => theme.backgroundModule};
+//   z-index: 2;
+// `
 
 const formatAnalyticsEventProperties = (
   trade: InterfaceTrade<Currency, Currency, TradeType>,
@@ -100,7 +100,7 @@ export default function SwapModalHeader({
 
   return (
     <AutoColumn gap="4px" style={{ marginTop: '1rem' }}>
-      <LightCard padding="0.75rem 1rem">
+      <LightCard padding="0.75rem 1rem" $backgroundColor="none">
         <AutoColumn gap="sm">
           <RowBetween align="center">
             <RowFixed gap="0px">
@@ -125,10 +125,12 @@ export default function SwapModalHeader({
           </RowBetween>
         </AutoColumn>
       </LightCard>
-      <ArrowWrapper>
-        <ArrowDown size="16" color={theme.textPrimary} />
+      <ArrowWrapper clickable={false}>
+        <ArrowContainer>
+          <ArrowDown size="24" color={theme.textPrimary} />
+        </ArrowContainer>
       </ArrowWrapper>
-      <LightCard padding="0.75rem 1rem" style={{ marginBottom: '0.25rem' }}>
+      <LightCard padding="0.75rem 1rem" style={{ marginBottom: '0.25rem' }} $backgroundColor="none">
         <AutoColumn gap="sm">
           <RowBetween align="flex-end">
             <RowFixed gap="0px">
@@ -156,7 +158,7 @@ export default function SwapModalHeader({
       <RowBetween style={{ marginTop: '0.25rem', padding: '0 1rem' }}>
         <TradePrice price={trade.executionPrice} />
       </RowBetween>
-      <LightCard style={{ padding: '.75rem', marginTop: '0.5rem' }}>
+      <LightCard style={{ padding: '.75rem', marginTop: '0.5rem' }} $backgroundColor="none">
         <AdvancedSwapDetails trade={trade} allowedSlippage={allowedSlippage} />
       </LightCard>
       {showAcceptChanges ? (
@@ -169,7 +171,12 @@ export default function SwapModalHeader({
               </ThemedText.DeprecatedMain>
             </RowFixed>
             <ButtonPrimary
-              style={{ padding: '.5rem', width: 'fit-content', fontSize: '0.825rem', borderRadius: '12px' }}
+              style={{
+                padding: '.5rem',
+                width: 'fit-content',
+                fontSize: '0.825rem',
+                borderRadius: '0',
+              }}
               onClick={onAcceptChanges}
             >
               <Trans>Accept</Trans>

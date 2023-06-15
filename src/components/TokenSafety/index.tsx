@@ -111,6 +111,9 @@ const LinkColumn = styled(AutoColumn)`
   position: relative;
 `
 
+/**
+ * border-radius: 8px;
+ */
 const ExplorerContainer = styled.div`
   width: 100%;
   height: 32px;
@@ -118,7 +121,6 @@ const ExplorerContainer = styled.div`
   font-size: 20px;
   background-color: ${({ theme }) => theme.accentActionSoft};
   color: ${({ theme }) => theme.accentAction};
-  border-radius: 8px;
   padding: 2px 12px;
   display: flex;
   align-items: center;
@@ -218,12 +220,12 @@ export default function TokenSafety({
 
   // Logic for only showing the 'unsupported' warning if one is supported and other isn't
   if (token1 && token1Warning && (token1Unsupported || !(token2Warning && token2Unsupported))) {
-    logos.push(<CurrencyLogo currency={token1} size="48px" />)
-    urls.push(<ExplorerView token={token1} />)
+    logos.push(<CurrencyLogo currency={token1} size="48px" key={token1.address} />)
+    urls.push(<ExplorerView token={token1} key={token1.address} />)
   }
   if (token2 && token2Warning && (token2Unsupported || !(token1Warning && token1Unsupported))) {
-    logos.push(<CurrencyLogo currency={token2} size="48px" />)
-    urls.push(<ExplorerView token={token2} />)
+    logos.push(<CurrencyLogo currency={token2} size="48px" key={token2.address} />)
+    urls.push(<ExplorerView token={token2} key={token2.address} />)
   }
 
   const plural = logos.length > 1
@@ -268,7 +270,7 @@ export default function TokenSafety({
         </ShortColumn>
         <ShortColumn>
           <InfoText>
-            {heading} {description} {learnMoreUrl}
+            {heading} {description}
           </InfoText>
         </ShortColumn>
         <LinkColumn>{urls}</LinkColumn>
@@ -289,7 +291,7 @@ export default function TokenSafety({
         </ShortColumn>
         <ShortColumn>
           <InfoText>
-            {heading} {description} {learnMoreUrl}
+            {heading} {description}
           </InfoText>
         </ShortColumn>
         <Buttons warning={tokenNotFoundWarning} onCancel={onCancel} showCancel={true} />

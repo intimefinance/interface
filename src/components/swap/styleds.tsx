@@ -24,33 +24,46 @@ export const PageWrapper = styled.div`
 `
 
 // Mostly copied from `AppBody` but it was getting too hard to maintain backwards compatibility.
+/**
+ * background: ${({ theme }) => theme.backgroundSurface};
+ * border-radius: 16px;
+ * border: 1px solid ${({ theme }) => theme.backgroundOutline};
+ * &:hover {
+ *  border: 1px solid ${({ theme }) => theme.backgroundOutline};
+ * }
+ */
 export const SwapWrapper = styled.main<{ chainId: number | undefined }>`
   position: relative;
-  background: ${({ theme }) => theme.backgroundSurface};
-  border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.backgroundOutline};
   padding: 8px;
   box-shadow: ${({ chainId }) => !!chainId && chainId === SupportedChainId.BNB && '0px 40px 120px 0px #f0b90b29'};
   z-index: ${Z_INDEX.deprecated_content};
   transition: transform 250ms ease;
-
-  &:hover {
-    border: 1px solid ${({ theme }) => theme.backgroundOutline};
-  }
 `
 
+export const ArrowContainer = styled.div`
+  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+`
+
+/**
+ * border-radius: 12px;
+ */
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
-  border-radius: 12px;
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
   position: relative;
-  margin-top: -18px;
-  margin-bottom: -18px;
+  margin-top: -14px;
+  margin-bottom: -14px;
   margin-left: auto;
   margin-right: auto;
-  background-color: ${({ theme }) => theme.backgroundInteractive};
-  border: 4px solid;
-  border-color: ${({ theme }) => theme.backgroundSurface};
+  background-color: ${({ theme }) => theme.background};
+  border: 1px solid;
+  border-color: ${({ theme }) => theme.backgroundModule};
 
   z-index: 2;
   ${({ clickable }) =>
@@ -58,7 +71,7 @@ export const ArrowWrapper = styled.div<{ clickable: boolean }>`
       ? css`
           :hover {
             cursor: pointer;
-            opacity: 0.8;
+            scale: 1.05;
           }
         `
       : null}
@@ -148,12 +161,12 @@ export const SwapShowAcceptChanges = styled(AutoColumn)`
   background-color: ${({ theme }) => transparentize(0.95, theme.deprecated_primary3)};
   color: ${({ theme }) => theme.accentAction};
   padding: 0.5rem;
-  border-radius: 12px;
+  border-radius: 0;
   margin-top: 8px;
 `
 
 export const ResponsiveTooltipContainer = styled(TooltipContainer)<{ origin?: string; width?: string }>`
-  background-color: ${({ theme }) => theme.backgroundSurface};
+  background-color: ${({ theme }) => theme.background};
   border: 1px solid ${({ theme }) => theme.backgroundInteractive};
   padding: 1rem;
   width: ${({ width }) => width ?? 'auto'};

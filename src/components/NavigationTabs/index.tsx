@@ -95,7 +95,7 @@ export function AddRemoveTabs({
           <StyledArrowLeft stroke={theme.textSecondary} />
         </StyledHistoryLink>
         <ThemedText.DeprecatedMediumHeader
-          fontWeight={500}
+          fontWeight="bold"
           fontSize={20}
           style={{ flex: '1', margin: 'auto', textAlign: children ? 'start' : 'center' }}
         >

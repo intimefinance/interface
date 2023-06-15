@@ -31,11 +31,12 @@ import { PaddedColumn, SearchInput, Separator } from './styleds'
 
 const ContentWrapper = styled(Column)`
   background-color: ${({ theme }) => theme.backgroundSurface};
+  border: 1px solid ${({ theme }) => theme.backgroundModule};
   width: 100%;
   overflow: hidden;
   flex: 1 1;
   position: relative;
-  border-radius: 20px;
+  border-radius: 0;
 `
 
 interface CurrencySearchProps {

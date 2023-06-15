@@ -7,7 +7,7 @@ import { useWeb3React } from '@web3-react/core'
 import { sendEvent } from 'components/analytics'
 import RangeBadge from 'components/Badge/RangeBadge'
 import { ButtonConfirmed, ButtonPrimary } from 'components/Button'
-import { LightCard } from 'components/Card'
+import Card from 'components/Card'
 import { AutoColumn } from 'components/Column'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import { Break } from 'components/earn/styled'
@@ -317,7 +317,7 @@ function Remove({ tokenId }: { tokenId: BigNumber }) {
                 </RowFixed>
                 <RangeBadge removed={removed} inRange={!outOfRange} />
               </RowBetween>
-              <LightCard>
+              <Card border="none" $backgroundColor={theme.backgroundLight}>
                 <AutoColumn gap="md">
                   <ThemedText.DeprecatedMain fontWeight={400}>
                     <Trans>Amount</Trans>
@@ -343,8 +343,8 @@ function Remove({ tokenId }: { tokenId: BigNumber }) {
                   </RowBetween>
                   <Slider value={percentForSlider} onChange={onPercentSelectForSlider} />
                 </AutoColumn>
-              </LightCard>
-              <LightCard>
+              </Card>
+              <Card border="none" $backgroundColor={theme.backgroundLight}>
                 <AutoColumn gap="md">
                   <RowBetween>
                     <Text fontSize={16} fontWeight={500}>
@@ -396,7 +396,7 @@ function Remove({ tokenId }: { tokenId: BigNumber }) {
                     </>
                   ) : null}
                 </AutoColumn>
-              </LightCard>
+              </Card>
 
               {showCollectAsWeth && (
                 <RowBetween>

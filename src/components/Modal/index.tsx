@@ -60,7 +60,7 @@ const StyledDialogContent = styled(AnimatedDialogContent)<StyledDialogProps>`
         min-height: ${$minHeight}vh;
       `}
     display: ${({ $scrollOverlay }) => ($scrollOverlay ? 'inline-table' : 'flex')};
-    border-radius: 20px;
+    border-radius: 0;
 
     @media screen and (max-width: ${({ theme }) => theme.breakpoint.md}px) {
       width: 65vw;
@@ -68,7 +68,7 @@ const StyledDialogContent = styled(AnimatedDialogContent)<StyledDialogProps>`
     @media screen and (max-width: ${({ theme }) => theme.breakpoint.sm}px) {
       margin: 0;
       width: 100vw;
-      border-radius: 20px;
+      border-radius: 0;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -100,7 +100,7 @@ export default function Modal({
   children,
   onSwipe = onDismiss,
   $scrollOverlay,
-  hideBorder = false,
+  hideBorder = true,
 }: ModalProps) {
   const fadeTransition = useTransition(isOpen, {
     config: { duration: 200 },

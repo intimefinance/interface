@@ -3,13 +3,14 @@ import useHttpLocations from 'hooks/useHttpLocations'
 import { useMemo } from 'react'
 import { isAddress } from 'utils'
 
+import CoreLogo from '../../assets/images/core-logo.png'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import BnbLogo from '../../assets/svg/bnb-logo.svg'
 import CeloLogo from '../../assets/svg/celo_logo.svg'
 import MaticLogo from '../../assets/svg/matic-token-icon.svg'
-import { isCelo, NATIVE_CHAIN_ID, nativeOnChain } from '../../constants/tokens'
+import { isCelo, isCore, NATIVE_CHAIN_ID, nativeOnChain } from '../../constants/tokens'
 
-type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'polygon' | 'smartchain'
+type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'polygon' | 'smartchain' | 'core_test'
 
 export function chainIdToNetworkName(networkId: SupportedChainId): Network {
   switch (networkId) {
@@ -23,6 +24,8 @@ export function chainIdToNetworkName(networkId: SupportedChainId): Network {
       return 'polygon'
     case SupportedChainId.BNB:
       return 'smartchain'
+    case SupportedChainId.CORE_TEST:
+      return 'core_test'
     default:
       return 'ethereum'
   }
@@ -38,6 +41,8 @@ export function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.MA
     case SupportedChainId.CELO:
     case SupportedChainId.CELO_ALFAJORES:
       return CeloLogo
+    case SupportedChainId.CORE_TEST:
+      return CoreLogo
     default:
       return EthereumLogo
   }
@@ -60,6 +65,10 @@ function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedC
     if (address === nativeOnChain(chainId).wrapped.address) {
       return 'https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png'
     }
+  }
+
+  if (isCore(chainId)) {
+    return `${process.env.REACT_APP_BASE_LOGO_URL}/${networkName}/${address}/logo.png`
   }
 }
 

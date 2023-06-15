@@ -208,7 +208,8 @@ export default function PositionListItem({
         <PrimaryPositionIdData>
           <DoubleCurrencyLogo currency0={currencyBase} currency1={currencyQuote} size={18} margin />
           <ThemedText.SubHeader>
-            &nbsp;{currencyQuote?.symbol}&nbsp;/&nbsp;{currencyBase?.symbol}
+            {/* &nbsp;{currencyQuote?.symbol}&nbsp;/&nbsp;{currencyBase?.symbol} */}
+            &nbsp;{currencyQuote?.symbol}/{currencyBase?.symbol}
           </ThemedText.SubHeader>
 
           <FeeTierText>

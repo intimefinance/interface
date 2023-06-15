@@ -354,6 +354,22 @@ export const BUSD_BSC = new Token(
 
 export const DAI_BSC = new Token(SupportedChainId.BNB, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'DAI')
 
+// Core Test Chain
+export const USDC_CORE_TEST = new Token(
+  SupportedChainId.CORE_TEST,
+  '0x65A8173c48B49a1320cc4513DCD4792e315fE2b1',
+  6,
+  'USDC',
+  'USD Coin'
+)
+export const USDT_CORE_TEST = new Token(
+  SupportedChainId.CORE_TEST,
+  '0x5700aff131756461537420e8f434d9f43ef97c48',
+  6,
+  'USDT',
+  'Tether USD'
+)
+
 export const UNI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(SupportedChainId.MAINNET, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
   [SupportedChainId.GOERLI]: new Token(SupportedChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
@@ -424,6 +440,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WBNB',
     'Wrapped BNB'
   ),
+  [SupportedChainId.CORE_TEST]: new Token(
+    SupportedChainId.CORE_TEST,
+    '0xeEFc44237354771fEb09Aa0a18A85eD536F15184',
+    18,
+    'WCORE',
+    'Wrapped CORE'
+  ),
 }
 
 export function isCelo(chainId: number): chainId is SupportedChainId.CELO | SupportedChainId.CELO_ALFAJORES {
@@ -485,6 +508,28 @@ class BscNativeCurrency extends NativeCurrency {
   }
 }
 
+export function isCore(chainId: number): chainId is SupportedChainId.CORE_TEST {
+  return chainId === SupportedChainId.CORE_TEST
+}
+
+class CoreNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId
+  }
+
+  get wrapped(): Token {
+    if (!isCore(this.chainId)) throw new Error('Not core')
+    const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
+    invariant(wrapped instanceof Token)
+    return wrapped
+  }
+
+  public constructor(chainId: number) {
+    if (!isCore(chainId)) throw new Error('Not core')
+    super(chainId, 18, 'CORE', 'Core')
+  }
+}
+
 class ExtendedEther extends Ether {
   public get wrapped(): Token {
     const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
@@ -509,6 +554,8 @@ export function nativeOnChain(chainId: number): NativeCurrency | Token {
     nativeCurrency = getCeloNativeCurrency(chainId)
   } else if (isBsc(chainId)) {
     nativeCurrency = new BscNativeCurrency(chainId)
+  } else if (isCore(chainId)) {
+    nativeCurrency = new CoreNativeCurrency(chainId)
   } else {
     nativeCurrency = ExtendedEther.onChain(chainId)
   }
@@ -535,5 +582,6 @@ export const TOKEN_SHORTHANDS: { [shorthand: string]: { [chainId in SupportedCha
     [SupportedChainId.CELO]: PORTAL_USDC_CELO.address,
     [SupportedChainId.CELO_ALFAJORES]: PORTAL_USDC_CELO.address,
     [SupportedChainId.GOERLI]: USDC_GOERLI.address,
+    [SupportedChainId.CORE_TEST]: USDC_CORE_TEST.address,
   },
 }

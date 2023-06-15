@@ -65,6 +65,7 @@ export function useAllTokensMultichain(): ChainTokenMap {
 }
 
 /** Returns all tokens from the default list + user added tokens */
+/** swap page, currency list of selector */
 export function useDefaultActiveTokens(chainId: Maybe<SupportedChainId>): { [address: string]: Token } {
   const defaultListTokens = useCombinedActiveList()
   const tokensFromMap = useTokensFromMap(defaultListTokens, chainId)

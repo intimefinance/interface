@@ -1,4 +1,3 @@
-import { transparentize } from 'polished'
 import { ReactNode, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import noop from 'utils/noop'
@@ -17,10 +16,11 @@ export const TooltipContainer = styled.div`
   line-height: 16px;
   word-break: break-word;
 
-  background: ${({ theme }) => theme.backgroundSurface};
-  border-radius: 12px;
+  background: ${({ theme }) => theme.background};
+  border-radius: 0;
   border: 1px solid ${({ theme }) => theme.backgroundInteractive};
-  box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.9, theme.shadow1)};
+  box-shadow: 0px 0px 1px rgba(255, 255, 255, 0.01), 0px 4px 8px rgba(255, 255, 255, 0.04),
+    0px 16px 24px rgba(255, 255, 255, 0.04), 0px 24px 32px rgba(255, 255, 255, 0.01);
 `
 
 interface TooltipProps extends Omit<PopoverProps, 'content'> {

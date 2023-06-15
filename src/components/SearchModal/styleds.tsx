@@ -23,6 +23,9 @@ export const MenuItem = styled(RowBetween)<{ dim?: boolean }>`
   opacity: ${({ disabled, selected, dim }) => (dim || disabled || selected ? 0.4 : 1)};
 `
 
+/**
+ * background-color: ${({ theme }) => theme.backgroundModule};
+ */
 export const SearchInput = styled.input`
   background: no-repeat scroll 7px 7px;
   background-image: url(${searchIcon});
@@ -36,10 +39,9 @@ export const SearchInput = styled.input`
   align-items: center;
   width: 100%;
   white-space: nowrap;
-  background-color: ${({ theme }) => theme.backgroundModule};
   border: none;
   outline: none;
-  border-radius: 12px;
+  border-radius: 0;
   color: ${({ theme }) => theme.textPrimary};
   border-style: solid;
   border: 1px solid ${({ theme }) => theme.backgroundOutline};
@@ -53,7 +55,7 @@ export const SearchInput = styled.input`
   }
   transition: border 100ms;
   :focus {
-    border: 1px solid ${({ theme }) => theme.accentActiveSoft};
+    border: 1px solid ${({ theme }) => theme.textPrimary};
     background-color: ${({ theme }) => theme.backgroundSurface};
     outline: none;
   }

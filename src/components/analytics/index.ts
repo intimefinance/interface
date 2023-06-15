@@ -2,7 +2,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useEffect } from 'react'
 import { UaEventOptions } from 'react-ga4/types/ga4'
 import { useLocation } from 'react-router-dom'
-import { isMobile } from 'utils/userAgent'
+// import { isMobile } from 'utils/userAgent'
 import { getCLS, getFCP, getFID, getLCP, Metric } from 'web-vitals'
 
 import GoogleAnalyticsProvider from './GoogleAnalyticsProvider'
@@ -33,30 +33,30 @@ export function sendTiming(timingCategory: any, timingVar: any, timingValue: any
   return googleAnalytics.gaCommandSendTiming(timingCategory, timingVar, timingValue, timingLabel)
 }
 
-if (typeof GOOGLE_ANALYTICS_ID === 'string') {
-  googleAnalytics.initialize(GOOGLE_ANALYTICS_ID, {
-    gaOptions: {
-      storage: 'none',
-      storeGac: false,
-      clientId: storedClientId ?? undefined,
-    },
-  })
-  googleAnalytics.set({
-    anonymizeIp: true,
-    customBrowserType: !isMobile
-      ? 'desktop'
-      : 'web3' in window || 'ethereum' in window
-      ? 'mobileWeb3'
-      : 'mobileRegular',
-  })
-} else {
-  googleAnalytics.initialize('test', { gtagOptions: { debug_mode: true } })
-}
+// if (typeof GOOGLE_ANALYTICS_ID === 'string') {
+//   googleAnalytics.initialize(GOOGLE_ANALYTICS_ID, {
+//     gaOptions: {
+//       storage: 'none',
+//       storeGac: false,
+//       clientId: storedClientId ?? undefined,
+//     },
+//   })
+//   googleAnalytics.set({
+//     anonymizeIp: true,
+//     customBrowserType: !isMobile
+//       ? 'desktop'
+//       : 'web3' in window || 'ethereum' in window
+//       ? 'mobileWeb3'
+//       : 'mobileRegular',
+//   })
+// } else {
+//   googleAnalytics.initialize('test', { gtagOptions: { debug_mode: true } })
+// }
 
 const installed = Boolean(window.navigator.serviceWorker?.controller)
 const hit = Boolean((window as any).__isDocumentCached)
 const action = installed ? (hit ? 'Cache hit' : 'Cache miss') : 'Not installed'
-sendEvent({ category: 'Service Worker', action, nonInteraction: true })
+// sendEvent({ category: 'Service Worker', action, nonInteraction: true })
 
 function reportWebVitals({ name, delta, id }: Metric) {
   sendTiming('Web Vitals', name, Math.round(name === 'CLS' ? delta * 1000 : delta), id)

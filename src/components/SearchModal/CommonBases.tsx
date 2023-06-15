@@ -19,7 +19,7 @@ const MobileWrapper = styled(AutoColumn)`
 
 const BaseWrapper = styled.div<{ disable?: boolean }>`
   border: 1px solid ${({ theme, disable }) => (disable ? theme.accentActive : theme.backgroundOutline)};
-  border-radius: 16px;
+  border-radius: 0;
   display: flex;
   padding: 6px;
   padding-right: 12px;

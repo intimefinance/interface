@@ -1,12 +1,11 @@
 import { useWeb3React } from '@web3-react/core'
-import IconButton from 'components/AccountDrawer/IconButton'
 import { AutoColumn } from 'components/Column'
 import { AutoRow } from 'components/Row'
 import { getConnections, networkConnection } from 'connection'
 import { ActivationStatus, useActivationState } from 'connection/activate'
 import { isSupportedChain } from 'constants/chains'
 import { useEffect } from 'react'
-import { Settings } from 'react-feather'
+// import { Settings } from 'react-feather'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme'
 import { flexColumnNoWrap } from 'theme/styles'
@@ -23,10 +22,12 @@ const Wrapper = styled.div`
   flex: 1;
 `
 
+/**
+ * border-radius: 12px;
+ */
 const OptionGrid = styled.div`
   display: grid;
   grid-gap: 2px;
-  border-radius: 12px;
   overflow: hidden;
   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToMedium`
     grid-template-columns: 1fr;
@@ -55,7 +56,7 @@ export default function WalletModal({ openSettings }: { openSettings: () => void
     <Wrapper data-testid="wallet-modal">
       <AutoRow justify="space-between" width="100%" marginBottom="16px">
         <ThemedText.SubHeader>Connect a wallet</ThemedText.SubHeader>
-        <IconButton Icon={Settings} onClick={openSettings} data-testid="wallet-settings" />
+        {/* <IconButton Icon={Settings} onClick={openSettings} data-testid="wallet-settings" /> */}
       </AutoRow>
       {activationState.status === ActivationStatus.ERROR ? (
         <ConnectionErrorView />

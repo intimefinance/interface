@@ -20,11 +20,14 @@ import styled from 'styled-components/macro'
 import { Separator, ThemedText } from 'theme'
 import { useDarkModeManager } from 'theme/components/ThemeToggle'
 
-import { AutoRouterLabel, AutoRouterLogo } from './RouterLabel'
+// import { AutoRouterLabel, AutoRouterLogo } from './RouterLabel'
+import { AutoRouterLabel } from './RouterLabel'
 
+/**
+ * border-radius: 16px;
+ */
 const Wrapper = styled(AutoColumn)<{ darkMode?: boolean; fixedOpen?: boolean }>`
   padding: ${({ fixedOpen }) => (fixedOpen ? '12px' : '12px 8px 12px 12px')};
-  border-radius: 16px;
   border: 1px solid ${({ theme, fixedOpen }) => (fixedOpen ? 'transparent' : theme.backgroundOutline)};
   cursor: pointer;
 `
@@ -72,7 +75,7 @@ export default memo(function SwapRoute({ trade, syncing, fixedOpen = false, ...r
       >
         <RowBetween onClick={() => setOpen(!open)}>
           <AutoRow gap="4px" width="auto">
-            <AutoRouterLogo />
+            {/* <AutoRouterLogo /> */}
             <AutoRouterLabel />
           </AutoRow>
           {fixedOpen ? null : <OpenCloseIcon open={open} />}
@@ -100,7 +103,7 @@ export default memo(function SwapRoute({ trade, syncing, fixedOpen = false, ...r
                   <div style={{ width: '250px', height: '15px' }} />
                 </LoadingRows>
               ) : (
-                <ThemedText.DeprecatedMain fontSize={12} width={400} margin={0}>
+                <ThemedText.DeprecatedMain fontSize={12} width={400} margin={0} color="white">
                   {trade?.gasUseEstimateUSD && chainId && SUPPORTED_GAS_ESTIMATE_CHAIN_IDS.includes(chainId) ? (
                     <Trans>Best price route costs ~{formattedGasPriceString} in gas. </Trans>
                   ) : null}{' '}

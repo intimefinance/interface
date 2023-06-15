@@ -6,7 +6,7 @@ const baseNavDropdown = style([
   sprinkles({
     background: 'backgroundSurface',
     borderStyle: 'solid',
-    borderColor: 'backgroundOutline',
+    borderColor: 'backgroundInteractive',
     borderWidth: '1px',
     paddingBottom: '8',
     paddingTop: '8',
@@ -20,7 +20,7 @@ export const NavDropdown = style([
   baseNavDropdown,
   sprinkles({
     position: 'absolute',
-    borderRadius: '12',
+    borderRadius: '0',
   }),
   {},
 ])
@@ -29,8 +29,8 @@ export const mobileNavDropdown = style([
   baseNavDropdown,
   sprinkles({
     position: 'fixed',
-    borderTopRightRadius: '12',
-    borderTopLeftRadius: '12',
+    borderTopRightRadius: '0',
+    borderTopLeftRadius: '0',
     top: 'unset',
     bottom: '56',
     left: '0',

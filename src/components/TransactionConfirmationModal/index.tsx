@@ -24,8 +24,8 @@ import { RowBetween, RowFixed } from '../Row'
 import AnimatedConfirmation from './AnimatedConfirmation'
 
 const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.backgroundSurface};
-  border-radius: 20px;
+  background-color: ${({ theme }) => theme.background};
+  border-radius: 0;
   outline: 1px solid ${({ theme }) => theme.backgroundOutline};
   width: 100%;
   padding: 1rem;
@@ -210,7 +210,7 @@ export function TransactionErrorContent({ message, onDismiss }: { message: React
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
         <AutoColumn style={{ marginTop: 20, padding: '2rem 0' }} gap="24px" justify="center">
-          <AlertTriangle color={theme.accentCritical} style={{ strokeWidth: 1 }} size={90} />
+          <AlertTriangle color={theme.accentAction} style={{ strokeWidth: 1 }} size={90} />
           <ThemedText.MediumHeader textAlign="center">{message}</ThemedText.MediumHeader>
         </AutoColumn>
       </Section>
