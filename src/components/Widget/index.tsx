@@ -1,12 +1,4 @@
-import { sendAnalyticsEvent, useTrace } from '@uniswap/analytics'
-import {
-  InterfaceEventName,
-  InterfaceSectionName,
-  SwapEventName,
-  SwapPriceUpdateUserResponse,
-} from '@uniswap/analytics-events'
-import { Trade } from '@uniswap/router-sdk'
-import { Currency, TradeType } from '@uniswap/sdk-core'
+import { Trade } from '@intimefinance/router-sdk'
 import {
   AddEthereumChainParameter,
   DialogAnimationType,
@@ -14,7 +6,15 @@ import {
   OnReviewSwapClick,
   SwapWidget,
   SwapWidgetSkeleton,
-} from '@uniswap/widgets'
+} from '@intimefinance/widgets'
+import { sendAnalyticsEvent, useTrace } from '@uniswap/analytics'
+import {
+  InterfaceEventName,
+  InterfaceSectionName,
+  SwapEventName,
+  SwapPriceUpdateUserResponse,
+} from '@uniswap/analytics-events'
+import { Currency, TradeType } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
 import { useActiveLocale } from 'hooks/useActiveLocale'

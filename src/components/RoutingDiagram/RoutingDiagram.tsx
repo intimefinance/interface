@@ -1,5 +1,5 @@
+import { Protocol } from '@intimefinance/router-sdk'
 import { Trans } from '@lingui/macro'
-import { Protocol } from '@uniswap/router-sdk'
 import { Currency } from '@uniswap/sdk-core'
 import { FeeAmount } from '@uniswap/v3-sdk'
 import Badge from 'components/Badge'

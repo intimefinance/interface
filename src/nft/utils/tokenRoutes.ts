@@ -1,6 +1,6 @@
-import { IRoute, Protocol } from '@uniswap/router-sdk'
+import { IRoute, Protocol } from '@intimefinance/router-sdk'
+import { Pair } from '@intimefinance/v2-sdk'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
-import { Pair } from '@uniswap/v2-sdk'
 import { Pool } from '@uniswap/v3-sdk'
 import { TokenAmountInput, TokenTradeRouteInput, TradePoolInput } from 'graphql/data/__generated__/types-and-hooks'
 import { InterfaceTrade } from 'state/routing/types'

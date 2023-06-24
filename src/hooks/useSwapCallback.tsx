@@ -1,4 +1,4 @@
-import { Trade } from '@uniswap/router-sdk'
+import { Trade } from '@intimefinance/router-sdk'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
 import { PermitSignature } from 'hooks/usePermitAllowance'
 import { useMemo } from 'react'

@@ -1,7 +1,4 @@
-import { sendAnalyticsEvent, useTrace } from '@uniswap/analytics'
-import { InterfaceEventName, InterfaceSectionName, SwapEventName } from '@uniswap/analytics-events'
-import { Trade } from '@uniswap/router-sdk'
-import { Currency, Percent } from '@uniswap/sdk-core'
+import { Trade } from '@intimefinance/router-sdk'
 import {
   OnTxSuccess,
   TradeType,
@@ -10,7 +7,10 @@ import {
   TransactionInfo,
   TransactionType,
   TransactionType as WidgetTransactionType,
-} from '@uniswap/widgets'
+} from '@intimefinance/widgets'
+import { sendAnalyticsEvent, useTrace } from '@uniswap/analytics'
+import { InterfaceEventName, InterfaceSectionName, SwapEventName } from '@uniswap/analytics-events'
+import { Currency, Percent } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import {
   formatPercentInBasisPointsNumber,

@@ -1,6 +1,6 @@
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@intimefinance/router-sdk'
+import { routeAmountsToString, SwapRoute } from '@intimefinance/smart-order-router'
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
-import { routeAmountsToString, SwapRoute } from '@uniswap/smart-order-router'
 import { Pool } from '@uniswap/v3-sdk'
 import { GetQuoteResult, V2PoolInRoute, V3PoolInRoute } from 'state/routing/types'
 

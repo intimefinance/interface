@@ -21,7 +21,7 @@ import {
   WrapTransactionInfo,
 } from 'state/transactions/types'
 
-// import { nativeOnChain } from '@uniswap/smart-order-router'
+// import { nativeOnChain } from '@intimefinance/smart-order-router'
 import { nativeOnChain } from '../../../../constants/tokens'
 import { getActivityTitle } from '../constants'
 import { Activity, ActivityMap } from './types'

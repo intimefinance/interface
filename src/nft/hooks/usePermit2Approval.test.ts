@@ -1,5 +1,5 @@
+import { USDC_MAINNET } from '@intimefinance/smart-order-router'
 import { CurrencyAmount } from '@uniswap/sdk-core'
-import { USDC_MAINNET } from '@uniswap/smart-order-router'
 import usePermit2Allowance, { AllowanceState } from 'hooks/usePermit2Allowance'
 import { renderHook } from 'test-utils/render'
 

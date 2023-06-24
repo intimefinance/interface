@@ -1,6 +1,6 @@
-import { MixedRouteSDK, Trade } from '@uniswap/router-sdk'
+import { MixedRouteSDK, Trade } from '@intimefinance/router-sdk'
+import { Route as V2Route } from '@intimefinance/v2-sdk'
 import { Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
-import { Route as V2Route } from '@uniswap/v2-sdk'
 import { Route as V3Route } from '@uniswap/v3-sdk'
 
 export enum TradeState {

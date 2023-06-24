@@ -1,4 +1,4 @@
-import { Trade } from '@uniswap/router-sdk'
+import { Trade } from '@intimefinance/router-sdk'
 import { Currency, CurrencyAmount, Percent, Price, Token, TradeType } from '@uniswap/sdk-core'
 import { NATIVE_CHAIN_ID } from 'constants/tokens'
 import { InterfaceTrade } from 'state/routing/types'
