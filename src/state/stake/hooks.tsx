@@ -1,7 +1,7 @@
 import { Interface } from '@ethersproject/abi'
+import { Pair } from '@intimefinance/v2-sdk'
 import { abi as STAKING_REWARDS_ABI } from '@uniswap/liquidity-staker/build/StakingRewards.json'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
-import { Pair } from '@uniswap/v2-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { SupportedChainId } from 'constants/chains'
 import useCurrentBlockTimestamp from 'hooks/useCurrentBlockTimestamp'
@@ -9,6 +9,7 @@ import JSBI from 'jsbi'
 import { NEVER_RELOAD, useMultipleContractSingleData } from 'lib/hooks/multicall'
 import { useMemo } from 'react'
 
+import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
 import { DAI, UNI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../constants/tokens'
 
 const STAKING_REWARDS_INTERFACE = new Interface(STAKING_REWARDS_ABI)
@@ -157,6 +158,7 @@ export function useStakingInfo(pairToFilterBy?: Pair | null): StakingInfo[] {
         // get the LP token
         const tokens = info[index].tokens
         const dummyPair = new Pair(
+          V2_FACTORY_ADDRESSES[chainId],
           CurrencyAmount.fromRawAmount(tokens[0], '0'),
           CurrencyAmount.fromRawAmount(tokens[1], '0')
         )

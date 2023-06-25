@@ -7,7 +7,7 @@ import { useWeb3React } from '@web3-react/core'
 import { sendEvent } from 'components/analytics'
 import Badge, { BadgeVariant } from 'components/Badge'
 import { ButtonConfirmed } from 'components/Button'
-import { BlueCard, DarkGrayCard, LightCard, YellowCard } from 'components/Card'
+import { BlueCard, DarkCard, DarkGrayCard, YellowCard } from 'components/Card'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import FeeSelector from 'components/FeeSelector'
 import RangeSelector from 'components/RangeSelector'
@@ -23,6 +23,7 @@ import JSBI from 'jsbi'
 import { NEVER_RELOAD, useSingleCallResult } from 'lib/hooks/multicall'
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { AlertCircle, AlertTriangle, ArrowDown } from 'react-feather'
+import { useLocation } from 'react-router'
 import { Navigate, useParams } from 'react-router-dom'
 import { Text } from 'rebass'
 import { useAppDispatch } from 'state/hooks'
@@ -397,7 +398,7 @@ function V2PairMigration({
         .
       </ThemedText.DeprecatedBody>
 
-      <LightCard>
+      <DarkCard>
         <AutoColumn gap="lg">
           <RowBetween>
             <RowFixed style={{ marginLeft: '8px' }}>
@@ -412,13 +413,13 @@ function V2PairMigration({
           </RowBetween>
           <LiquidityInfo token0Amount={token0Value} token1Amount={token1Value} />
         </AutoColumn>
-      </LightCard>
+      </DarkCard>
 
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <ArrowDown size={24} />
       </div>
 
-      <LightCard>
+      <DarkCard>
         <AutoColumn gap="lg">
           <RowBetween>
             <RowFixed style={{ marginLeft: '8px' }}>
@@ -434,7 +435,13 @@ function V2PairMigration({
 
           <FeeSelector feeAmount={feeAmount} handleFeePoolSelect={setFeeAmount} />
           {noLiquidity && (
-            <BlueCard style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <BlueCard
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
               <AlertCircle color={theme.textPrimary} style={{ marginBottom: '12px', opacity: 0.8 }} />
               <ThemedText.DeprecatedBody
                 fontSize={14}
@@ -592,9 +599,9 @@ function V2PairMigration({
                   <ThemedText.DeprecatedBlack fontSize={12}>
                     <Trans>
                       At least {formatCurrencyAmount(refund0, 4)}{' '}
-                      {chainId && WRAPPED_NATIVE_CURRENCY[chainId]?.equals(token0) ? 'ETH' : token0.symbol} and{' '}
+                      {chainId && WRAPPED_NATIVE_CURRENCY[chainId]?.equals(token0) ? 'CORE' : token0.symbol} and{' '}
                       {formatCurrencyAmount(refund1, 4)}{' '}
-                      {chainId && WRAPPED_NATIVE_CURRENCY[chainId]?.equals(token1) ? 'ETH' : token1.symbol} will be
+                      {chainId && WRAPPED_NATIVE_CURRENCY[chainId]?.equals(token1) ? 'CORE' : token1.symbol} will be
                       refunded to your wallet due to selected price range.
                     </Trans>
                   </ThemedText.DeprecatedBlack>
@@ -657,12 +664,17 @@ function V2PairMigration({
             </AutoColumn>
           </AutoColumn>
         </AutoColumn>
-      </LightCard>
+      </DarkCard>
     </AutoColumn>
   )
 }
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+
 export default function MigrateV2Pair() {
+  const query = useQuery()
   const { address } = useParams<{ address: string }>()
   // reset mint state on component mount, and as a cleanup (on unmount)
   const dispatch = useAppDispatch()
@@ -725,7 +737,7 @@ export default function MigrateV2Pair() {
     <BodyWrapper style={{ padding: 24 }}>
       <AutoColumn gap="16px">
         <AutoRow style={{ alignItems: 'center', justifyContent: 'space-between' }} gap="8px">
-          <BackArrow to="/migrate/v2" />
+          <BackArrow to={query.get('origin') ?? '/migrate/v2'} />
           <ThemedText.DeprecatedMediumHeader>
             <Trans>Migrate V2 Liquidity</Trans>
           </ThemedText.DeprecatedMediumHeader>

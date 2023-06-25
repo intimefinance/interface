@@ -11,10 +11,10 @@ import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
 import styled, { useTheme } from 'styled-components/macro'
 
-import { ButtonOutlined, ButtonPrimary, ButtonSecondary } from '../../components/Button'
-import Card from '../../components/Card'
+import { ButtonOutlined, ButtonPrimary } from '../../components/Button'
+import Card, { DarkCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
-import { CardBGImage, CardNoise, CardSection, DataCard } from '../../components/earn/styled'
+import { CardSection } from '../../components/earn/styled' // CardBGImage, CardNoise,
 import FullPositionCard from '../../components/PositionCard'
 import { RowBetween, RowFixed } from '../../components/Row'
 import { Dots } from '../../components/swap/styleds'
@@ -27,7 +27,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { ExternalLink, HideSmall, ThemedText } from '../../theme'
 
 const PageWrapper = styled(AutoColumn)`
-  max-width: 640px;
+  max-width: 870px;
   width: 100%;
 
   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
@@ -35,10 +35,10 @@ const PageWrapper = styled(AutoColumn)`
   `};
 `
 
-const VoteCard = styled(DataCard)`
-  background: radial-gradient(76.02% 75.41% at 1.84% 0%, #27ae60 0%, #000000 100%);
-  overflow: hidden;
-`
+// const VoteCard = styled(DataCard)`
+//   background: radial-gradient(76.02% 75.41% at 1.84% 0%, #27ae60 0%, #000000 100%);
+//   overflow: hidden;
+// `
 
 const TitleRow = styled(RowBetween)`
   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
@@ -58,27 +58,27 @@ const ButtonRow = styled(RowFixed)`
   `};
 `
 
+// border-radius: 12px;
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   height: 40px;
   width: fit-content;
-  border-radius: 12px;
   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
     width: 48%;
   `};
 `
 
-const ResponsiveButtonSecondary = styled(ButtonSecondary)`
-  height: 40px;
-  width: fit-content;
-  ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
-    width: 48%;
-  `};
-`
+// const ResponsiveButtonSecondary = styled(ButtonSecondary)`
+//   height: 40px;
+//   width: fit-content;
+//   ${({ theme }) => theme.deprecated_mediaWidth.deprecated_upToSmall`
+//     width: 48%;
+//   `};
+// `
 
+// border-radius: 12px;
 const EmptyProposals = styled.div`
   border: 1px solid ${({ theme }) => theme.deprecated_text4};
   padding: 16px 12px;
-  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -145,9 +145,7 @@ export default function Pool() {
     <Trace page={InterfacePageName.POOL_PAGE} shouldLogImpression>
       <>
         <PageWrapper>
-          <VoteCard>
-            <CardBGImage />
-            <CardNoise />
+          <DarkCard padding="8px">
             <CardSection>
               <AutoColumn gap="md">
                 <RowBetween>
@@ -174,9 +172,7 @@ export default function Pool() {
                 </ExternalLink>
               </AutoColumn>
             </CardSection>
-            <CardBGImage />
-            <CardNoise />
-          </VoteCard>
+          </DarkCard>
 
           {unsupportedV2Network ? (
             <AutoColumn gap="lg" justify="center">
@@ -198,10 +194,24 @@ export default function Pool() {
                     </ThemedText.DeprecatedMediumHeader>
                   </HideSmall>
                   <ButtonRow>
-                    <ResponsiveButtonSecondary as={Link} padding="6px 8px" to="/add/v2/ETH">
+                    <ButtonOutlined
+                      as={Link}
+                      to="/add/v2/ETH"
+                      style={{
+                        padding: '10px 16px',
+                        margin: '0 4px',
+                        width: 'fit-content',
+                        fontSize: '14px',
+                      }}
+                    >
                       <Trans>Create a pair</Trans>
-                    </ResponsiveButtonSecondary>
-                    <ResponsiveButtonPrimary id="find-pool-button" as={Link} to="/pools/v2/find" padding="6px 8px">
+                    </ButtonOutlined>
+                    <ResponsiveButtonPrimary
+                      id="find-pool-button"
+                      as={Link}
+                      to="/pools/v2/find?origin=/pools/v2"
+                      padding="6px 8px"
+                    >
                       <Text fontWeight={500} fontSize={16}>
                         <Trans>Import Pool</Trans>
                       </Text>
@@ -230,7 +240,7 @@ export default function Pool() {
                   </EmptyProposals>
                 ) : allV2PairsWithLiquidity?.length > 0 || stakingPairs?.length > 0 ? (
                   <>
-                    <ButtonSecondary>
+                    <DarkCard>
                       <RowBetween>
                         <Trans>
                           <ExternalLink href={'https://v2.info.uniswap.org/account/' + account}>
@@ -239,7 +249,7 @@ export default function Pool() {
                           <span> ↗ </span>
                         </Trans>
                       </RowBetween>
-                    </ButtonSecondary>
+                    </DarkCard>
                     {v2PairsWithoutStakedAmount.map((v2Pair) => (
                       <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
                     ))}
@@ -261,7 +271,6 @@ export default function Pool() {
                         style={{
                           padding: '8px 16px',
                           margin: '0 4px',
-                          borderRadius: '12px',
                           width: 'fit-content',
                           fontSize: '14px',
                         }}

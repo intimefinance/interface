@@ -5,7 +5,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
 import { ButtonGray, ButtonPrimary, ButtonText } from 'components/Button'
 import { AutoColumn } from 'components/Column'
-import { Menu } from 'components/Menu'
+import { FlyoutAlignment, Menu } from 'components/Menu'
 import PositionList from 'components/PositionList'
 import { RowBetween, RowFixed } from 'components/Row'
 import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
@@ -13,7 +13,7 @@ import { isSupportedChain } from 'constants/chains'
 import { useFilterPossiblyMaliciousPositions } from 'hooks/useFilterPossiblyMaliciousPositions'
 import { useV3Positions } from 'hooks/useV3Positions'
 import { useMemo } from 'react'
-import { AlertTriangle, BookOpen, ChevronsRight, Inbox, Layers } from 'react-feather'
+import { AlertTriangle, ChevronDown, ChevronsRight, Inbox, Layers } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { useUserHideClosedPositions } from 'state/user/hooks'
 import styled, { css, useTheme } from 'styled-components/macro'
@@ -83,8 +83,8 @@ const PoolMenuItem = styled.div`
   width: 100%;
   font-weight: 500;
 `
+// border-radius: 12px;
 const MoreOptionsButton = styled(ButtonGray)`
-  border-radius: 12px;
   flex: 1 1 auto;
   padding: 6px 8px;
   width: 100%;
@@ -233,7 +233,7 @@ export default function Pool() {
           <ChevronsRight size={16} />
         </PoolMenuItem>
       ),
-      link: '/migrate/v2',
+      link: '/migrate/v2?origin=/pools',
       external: false,
     },
     {
@@ -246,16 +246,16 @@ export default function Pool() {
       link: '/pools/v2',
       external: false,
     },
-    {
-      content: (
-        <PoolMenuItem>
-          <Trans>Learn</Trans>
-          <BookOpen size={16} />
-        </PoolMenuItem>
-      ),
-      link: 'https://support.uniswap.org/hc/en-us/categories/8122334631437-Providing-Liquidity-',
-      external: true,
-    },
+    // {
+    //   content: (
+    //     <PoolMenuItem>
+    //       <Trans>Learn</Trans>
+    //       <BookOpen size={16} />
+    //     </PoolMenuItem>
+    //   ),
+    //   link: 'https://support.uniswap.org/hc/en-us/categories/8122334631437-Providing-Liquidity-',
+    //   external: true,
+    // },
   ]
 
   return (
@@ -268,7 +268,7 @@ export default function Pool() {
                 <Trans>Pools</Trans>
               </ThemedText.LargeHeader>
               <ButtonRow>
-                {/* {showV2Features && (
+                {showV2Features && (
                   <PoolMenu
                     menuItems={menuItems}
                     flyoutAlignment={FlyoutAlignment.LEFT}
@@ -281,7 +281,7 @@ export default function Pool() {
                       </MoreOptionsButton>
                     )}
                   />
-                )} */}
+                )}
                 <ResponsiveButtonPrimary data-cy="join-pool-button" id="join-pool-button" as={Link} to="/add/ETH">
                   + <Trans>New Position</Trans>
                 </ResponsiveButtonPrimary>

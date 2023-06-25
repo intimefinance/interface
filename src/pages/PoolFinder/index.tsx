@@ -10,7 +10,6 @@ import { useLocation } from 'react-router'
 import { Text } from 'rebass'
 
 import { ButtonDropdownLight } from '../../components/Button'
-import { LightCard } from '../../components/Card'
 import { BlueCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import CurrencyLogo from '../../components/Logo/CurrencyLogo'
@@ -85,7 +84,7 @@ export default function PoolFinder() {
   }, [setShowSearch])
 
   const prerequisiteMessage = (
-    <LightCard padding="45px 10px">
+    <BlueCard padding="45px 10px">
       <Text textAlign="center">
         {!account ? (
           <Trans>Connect to a wallet to find pools</Trans>
@@ -93,7 +92,7 @@ export default function PoolFinder() {
           <Trans>Select a token to find your v2 liquidity.</Trans>
         )}
       </Text>
-    </LightCard>
+    </BlueCard>
   )
 
   return (
@@ -157,12 +156,17 @@ export default function PoolFinder() {
 
             {hasPosition && (
               <ColumnCenter
-                style={{ justifyItems: 'center', backgroundColor: '', padding: '12px 0px', borderRadius: '12px' }}
+                style={{
+                  justifyItems: 'center',
+                  backgroundColor: '',
+                  padding: '12px 0px',
+                  borderRadius: '0',
+                }}
               >
                 <Text textAlign="center" fontWeight={500}>
                   <Trans>Pool Found!</Trans>
                 </Text>
-                <StyledInternalLink to="pools/v2">
+                <StyledInternalLink to="/pools/v2">
                   <Text textAlign="center">
                     <Trans>Manage this pool.</Trans>
                   </Text>
@@ -175,47 +179,47 @@ export default function PoolFinder() {
                 hasPosition && pair ? (
                   <MinimalPositionCard pair={pair} border="1px solid #CED0D9" />
                 ) : (
-                  <LightCard padding="45px 10px">
+                  <BlueCard padding="45px 10px">
                     <AutoColumn gap="sm" justify="center">
                       <Text textAlign="center">
                         <Trans>You don’t have liquidity in this pool yet.</Trans>
                       </Text>
-                      <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
+                      <StyledInternalLink to={`/add/v2/${currencyId(currency0)}/${currencyId(currency1)}`}>
                         <Text textAlign="center">
                           <Trans>Add liquidity.</Trans>
                         </Text>
                       </StyledInternalLink>
                     </AutoColumn>
-                  </LightCard>
+                  </BlueCard>
                 )
               ) : validPairNoLiquidity ? (
-                <LightCard padding="45px 10px">
+                <BlueCard padding="45px 10px">
                   <AutoColumn gap="sm" justify="center">
                     <Text textAlign="center">
                       <Trans>No pool found.</Trans>
                     </Text>
-                    <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
+                    <StyledInternalLink to={`/add/v2/${currencyId(currency0)}/${currencyId(currency1)}`}>
                       <Trans>Create pool.</Trans>
                     </StyledInternalLink>
                   </AutoColumn>
-                </LightCard>
+                </BlueCard>
               ) : pairState === PairState.INVALID ? (
-                <LightCard padding="45px 10px">
+                <BlueCard padding="45px 10px">
                   <AutoColumn gap="sm" justify="center">
                     <Text textAlign="center" fontWeight={500}>
                       <Trans>Invalid pair.</Trans>
                     </Text>
                   </AutoColumn>
-                </LightCard>
+                </BlueCard>
               ) : pairState === PairState.LOADING ? (
-                <LightCard padding="45px 10px">
+                <BlueCard padding="45px 10px">
                   <AutoColumn gap="sm" justify="center">
                     <Text textAlign="center">
                       <Trans>Loading</Trans>
                       <Dots />
                     </Text>
                   </AutoColumn>
-                </LightCard>
+                </BlueCard>
               ) : null
             ) : (
               prerequisiteMessage

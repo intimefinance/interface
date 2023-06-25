@@ -1,3 +1,5 @@
+import { Trade } from '@intimefinance/router-sdk'
+import { UNIVERSAL_ROUTER_ADDRESS } from '@intimefinance/universal-router-sdk'
 import { Trans } from '@lingui/macro'
 import { sendAnalyticsEvent, Trace, TraceEvent, useTrace } from '@uniswap/analytics'
 import {
@@ -8,7 +10,6 @@ import {
   InterfaceSectionName,
   SwapEventName,
 } from '@uniswap/analytics-events'
-import { Trade } from '@uniswap/router-sdk'
 import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
@@ -58,7 +59,6 @@ import {
 import SwapHeader from '../../components/swap/SwapHeader'
 import { SwitchLocaleLink } from '../../components/SwitchLocaleLink'
 import { getSwapCurrencyId, TOKEN_SHORTHANDS } from '../../constants/tokens'
-import { UNIVERSAL_ROUTER_ADDRESS } from '../../constants/universalRouterAddress'
 import { useCurrency, useDefaultActiveTokens } from '../../hooks/Tokens'
 import { useIsSwapUnsupported } from '../../hooks/useIsSwapUnsupported'
 import useWrapCallback, { WrapErrorText, WrapType } from '../../hooks/useWrapCallback'

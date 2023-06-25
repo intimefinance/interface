@@ -1,4 +1,3 @@
-import { FACTORY_ADDRESS as V2_FACTORY_ADDRESS } from '@uniswap/v2-sdk'
 import { FACTORY_ADDRESS as V3_FACTORY_ADDRESS } from '@uniswap/v3-sdk'
 
 import { SupportedChainId } from './chains'
@@ -19,8 +18,14 @@ export const UNI_ADDRESS: AddressMap = constructSameAddressMap('0x1f9840a85d5aF5
 
 export const UNISWAP_NFT_AIRDROP_CLAIM_ADDRESS = '0x8B799381ac40b838BBA4131ffB26197C432AFe78'
 
-export const V2_FACTORY_ADDRESSES: AddressMap = constructSameAddressMap(V2_FACTORY_ADDRESS)
-export const V2_ROUTER_ADDRESS: AddressMap = constructSameAddressMap('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D')
+export const V2_FACTORY_ADDRESSES: AddressMap = {
+  ...constructSameAddressMap('0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'),
+  [SupportedChainId.CORE_TEST]: '0x7f7ad80Cb22c591e1064d96c9A076a47C3374f08',
+}
+export const V2_ROUTER_ADDRESS: AddressMap = {
+  ...constructSameAddressMap('0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'),
+  [SupportedChainId.CORE_TEST]: '0xC497bcB7ac2443d7f574843145dbF9244ea2F2f2',
+}
 
 // core v3 addresses
 const CORE_TEST_V3_CORE_FACTORY_ADDRESSES = '0xDC85934D7045bd99e7a422487efF64f7F25603A9'

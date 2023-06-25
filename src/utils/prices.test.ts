@@ -1,6 +1,6 @@
-import { Trade } from '@uniswap/router-sdk'
+import { Trade } from '@intimefinance/router-sdk'
+import { Pair, Route as V2Route } from '@intimefinance/v2-sdk'
 import { CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
-import { Pair, Route as V2Route } from '@uniswap/v2-sdk'
 import { Route as V3Route } from '@uniswap/v3-sdk'
 import JSBI from 'jsbi'
 import {
@@ -12,13 +12,16 @@ import {
   toCurrencyAmount,
 } from 'test-utils/constants'
 
+import { V2_FACTORY_ADDRESSES } from '../constants/addresses'
 import { computeRealizedLPFeeAmount, warningSeverity } from './prices'
 
 const pair12 = new Pair(
+  V2_FACTORY_ADDRESSES[TEST_TOKEN_1.chainId],
   CurrencyAmount.fromRawAmount(TEST_TOKEN_1, JSBI.BigInt(10000)),
   CurrencyAmount.fromRawAmount(TEST_TOKEN_2, JSBI.BigInt(20000))
 )
 const pair23 = new Pair(
+  V2_FACTORY_ADDRESSES[TEST_TOKEN_2.chainId],
   CurrencyAmount.fromRawAmount(TEST_TOKEN_2, JSBI.BigInt(20000)),
   CurrencyAmount.fromRawAmount(TEST_TOKEN_3, JSBI.BigInt(30000))
 )

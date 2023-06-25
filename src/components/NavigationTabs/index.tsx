@@ -74,9 +74,10 @@ export function AddRemoveTabs({
   const location = useLocation()
 
   // detect if back should redirect to v3 or v2 pool page
-  const poolLink = location.pathname.includes('add/v2')
-    ? '/pools/v2'
-    : '/pools' + (positionID ? `/${positionID.toString()}` : '')
+  const poolLink =
+    location.pathname.includes('add/v2') || location.pathname.includes('remove/v2')
+      ? '/pools/v2'
+      : '/pools' + (positionID ? `/${positionID.toString()}` : '')
 
   return (
     <Tabs>
@@ -97,14 +98,18 @@ export function AddRemoveTabs({
         <ThemedText.DeprecatedMediumHeader
           fontWeight="bold"
           fontSize={20}
-          style={{ flex: '1', margin: 'auto', textAlign: children ? 'start' : 'center' }}
+          style={{
+            flex: '1',
+            margin: 'auto',
+            textAlign: children ? 'start' : 'center',
+          }}
         >
           {creating ? (
             <Trans>Create a pair</Trans>
           ) : adding ? (
-            <Trans>Add Liquidity</Trans>
+            <Trans> {location.pathname.includes('v2') ? 'Add V2 Liquidity' : 'Add Liquidity'} </Trans>
           ) : (
-            <Trans>Remove Liquidity</Trans>
+            <Trans>{location.pathname.includes('v2') ? 'Remove V2 Liquidity' : 'Remove Liquidity'}</Trans>
           )}
         </ThemedText.DeprecatedMediumHeader>
         <Box style={{ marginRight: '.5rem' }}>{children}</Box>

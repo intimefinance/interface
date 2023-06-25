@@ -1,7 +1,7 @@
 import { Interface } from '@ethersproject/abi'
+import { computePairAddress, Pair } from '@intimefinance/v2-sdk'
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
-import { computePairAddress, Pair } from '@uniswap/v2-sdk'
 import { useMultipleContractSingleData } from 'lib/hooks/multicall'
 import { useMemo } from 'react'
 
@@ -52,6 +52,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
       return [
         PairState.EXISTS,
         new Pair(
+          V2_FACTORY_ADDRESSES[token0.chainId],
           CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
           CurrencyAmount.fromRawAmount(token1, reserve1.toString())
         ),

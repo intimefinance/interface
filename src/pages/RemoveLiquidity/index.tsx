@@ -18,7 +18,7 @@ import { Text } from 'rebass'
 import { useTheme } from 'styled-components/macro'
 
 import { ButtonConfirmed, ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
-import { BlueCard, LightCard } from '../../components/Card'
+import { BlueCard, DarkCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
@@ -470,7 +470,7 @@ function RemoveLiquidity() {
                 </ThemedText.DeprecatedLink>
               </AutoColumn>
             </BlueCard>
-            <LightCard>
+            <DarkCard>
               <AutoColumn gap="20px">
                 <RowBetween>
                   <Text fontWeight={500}>
@@ -510,13 +510,13 @@ function RemoveLiquidity() {
                   </>
                 )}
               </AutoColumn>
-            </LightCard>
+            </DarkCard>
             {!showDetailed && (
               <>
                 <ColumnCenter>
                   <ArrowDown size="16" color={theme.textSecondary} />
                 </ColumnCenter>
-                <LightCard>
+                <DarkCard>
                   <AutoColumn gap="10px">
                     <RowBetween>
                       <Text fontSize={24} fontWeight={500}>
@@ -554,7 +554,7 @@ function RemoveLiquidity() {
                                 : currencyIdB
                             }`}
                           >
-                            Receive WETH
+                            Receive WCORE
                           </StyledInternalLink>
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
@@ -564,13 +564,13 @@ function RemoveLiquidity() {
                               currencyB && WRAPPED_NATIVE_CURRENCY[chainId]?.equals(currencyB) ? 'ETH' : currencyIdB
                             }`}
                           >
-                            Receive ETH
+                            Receive CORE
                           </StyledInternalLink>
                         ) : null}
                       </RowBetween>
                     ) : null}
                   </AutoColumn>
-                </LightCard>
+                </DarkCard>
               </>
             )}
 
@@ -652,8 +652,9 @@ function RemoveLiquidity() {
                     confirmed={approval === ApprovalState.APPROVED || signatureData !== null}
                     disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
                     mr="0.5rem"
-                    fontWeight={500}
-                    fontSize={16}
+                    padding="16px"
+                    fontWeight="bold"
+                    fontSize={15}
                   >
                     {approval === ApprovalState.PENDING ? (
                       <Dots>
@@ -666,13 +667,14 @@ function RemoveLiquidity() {
                     )}
                   </ButtonConfirmed>
                   <ButtonError
+                    padding="16px"
                     onClick={() => {
                       setShowConfirm(true)
                     }}
                     disabled={!isValid || (signatureData === null && approval !== ApprovalState.APPROVED)}
                     error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
                   >
-                    <Text fontSize={16} fontWeight={500}>
+                    <Text fontSize={15} fontWeight="bold">
                       {error || <Trans>Remove</Trans>}
                     </Text>
                   </ButtonError>
@@ -684,7 +686,14 @@ function RemoveLiquidity() {
       </AppBody>
 
       {pair ? (
-        <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
+        <AutoColumn
+          style={{
+            minWidth: '20rem',
+            width: '100%',
+            maxWidth: '420px',
+            marginTop: '1rem',
+          }}
+        >
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
       ) : null}

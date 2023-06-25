@@ -16,7 +16,7 @@ import { Text } from 'rebass'
 import { useTheme } from 'styled-components/macro'
 
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
-import { BlueCard, LightCard } from '../../components/Card'
+import { BlueCard, DarkCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
@@ -218,8 +218,8 @@ export default function AddLiquidity() {
 
   const modalHeader = () => {
     return noLiquidity ? (
-      <AutoColumn gap="20px">
-        <LightCard mt="20px" $borderRadius="20px">
+      <AutoColumn gap="20px" style={{ marginBottom: '10px' }}>
+        <DarkCard mt="20px">
           <RowFlat>
             <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
               {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol}
@@ -230,25 +230,29 @@ export default function AddLiquidity() {
               size={30}
             />
           </RowFlat>
-        </LightCard>
+        </DarkCard>
       </AutoColumn>
     ) : (
-      <AutoColumn gap="20px">
-        <RowFlat style={{ marginTop: '20px' }}>
-          <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
-            {liquidityMinted?.toSignificant(6)}
-          </Text>
-          <DoubleCurrencyLogo
-            currency0={currencies[Field.CURRENCY_A]}
-            currency1={currencies[Field.CURRENCY_B]}
-            size={30}
-          />
-        </RowFlat>
-        <Row>
-          <Text fontSize="24px">
-            {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol + ' Pool Tokens'}
-          </Text>
-        </Row>
+      <AutoColumn gap="10px" style={{ marginBottom: '10px' }}>
+        <DarkCard mt="20px">
+          <AutoColumn gap="20px">
+            <RowFlat>
+              <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
+                {liquidityMinted?.toSignificant(6)}
+              </Text>
+              <DoubleCurrencyLogo
+                currency0={currencies[Field.CURRENCY_A]}
+                currency1={currencies[Field.CURRENCY_B]}
+                size={30}
+              />
+            </RowFlat>
+            <Row>
+              <Text fontSize="24px">
+                {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol + ' Pool Tokens'}
+              </Text>
+            </Row>
+          </AutoColumn>
+        </DarkCard>
         <ThemedText.DeprecatedItalic fontSize={12} textAlign="left" padding="8px 0 0 0 ">
           <Trans>
             Output is estimated. If the price changes by more than {allowedSlippage.toSignificant(4)}% your transaction
@@ -311,9 +315,10 @@ export default function AddLiquidity() {
     // if there was a tx hash, we want to clear the input
     if (txHash) {
       onFieldAInput('')
+      onFieldBInput('')
     }
     setTxHash('')
-  }, [onFieldAInput, txHash])
+  }, [onFieldAInput, onFieldBInput, txHash])
 
   const { pathname } = useLocation()
   const isCreate = pathname.includes('/create')
@@ -342,41 +347,39 @@ export default function AddLiquidity() {
             currencyToAdd={pair?.liquidityToken}
           />
           <AutoColumn gap="20px">
-            {noLiquidity ||
-              (isCreate ? (
-                <ColumnCenter>
-                  <BlueCard>
-                    <AutoColumn gap="10px">
-                      <ThemedText.DeprecatedLink fontWeight={600} color="accentAction">
-                        <Trans>You are the first liquidity provider.</Trans>
-                      </ThemedText.DeprecatedLink>
-                      <ThemedText.DeprecatedLink fontWeight={400} color="accentAction">
-                        <Trans>The ratio of tokens you add will set the price of this pool.</Trans>
-                      </ThemedText.DeprecatedLink>
-                      <ThemedText.DeprecatedLink fontWeight={400} color="accentAction">
-                        <Trans>Once you are happy with the rate click supply to review.</Trans>
-                      </ThemedText.DeprecatedLink>
-                    </AutoColumn>
-                  </BlueCard>
-                </ColumnCenter>
-              ) : (
-                <ColumnCenter>
-                  <BlueCard>
-                    <AutoColumn gap="10px">
-                      <ThemedText.DeprecatedLink fontWeight={400} color="accentAction">
-                        <Trans>
-                          <b>
-                            <Trans>Tip:</Trans>
-                          </b>{' '}
-                          When you add liquidity, you will receive pool tokens representing your position. These tokens
-                          automatically earn fees proportional to your share of the pool, and can be redeemed at any
-                          time.
-                        </Trans>
-                      </ThemedText.DeprecatedLink>
-                    </AutoColumn>
-                  </BlueCard>
-                </ColumnCenter>
-              ))}
+            {noLiquidity || isCreate ? (
+              <ColumnCenter>
+                <BlueCard>
+                  <AutoColumn gap="10px">
+                    <ThemedText.DeprecatedLink fontWeight={600} color="accentAction">
+                      <Trans>You are the first liquidity provider.</Trans>
+                    </ThemedText.DeprecatedLink>
+                    <ThemedText.DeprecatedLink fontWeight={400} color="accentAction">
+                      <Trans>The ratio of tokens you add will set the price of this pool.</Trans>
+                    </ThemedText.DeprecatedLink>
+                    <ThemedText.DeprecatedLink fontWeight={400} color="accentAction">
+                      <Trans>Once you are happy with the rate click supply to review.</Trans>
+                    </ThemedText.DeprecatedLink>
+                  </AutoColumn>
+                </BlueCard>
+              </ColumnCenter>
+            ) : (
+              <ColumnCenter>
+                <BlueCard>
+                  <AutoColumn gap="10px">
+                    <ThemedText.DeprecatedLink fontWeight={400} color="accentAction">
+                      <Trans>
+                        <b>
+                          <Trans>Tip:</Trans>
+                        </b>{' '}
+                        When you add liquidity, you will receive pool tokens representing your position. These tokens
+                        automatically earn fees proportional to your share of the pool, and can be redeemed at any time.
+                      </Trans>
+                    </ThemedText.DeprecatedLink>
+                  </AutoColumn>
+                </BlueCard>
+              </ColumnCenter>
+            )}
             <CurrencyInputPanel
               value={formattedAmounts[Field.CURRENCY_A]}
               onUserInput={onFieldAInput}
@@ -406,25 +409,25 @@ export default function AddLiquidity() {
             />
             {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
               <>
-                <LightCard padding="0px" $borderRadius="20px">
+                <BlueCard padding="0px">
                   <RowBetween padding="1rem">
-                    <ThemedText.DeprecatedSubHeader fontWeight={500} fontSize={14}>
+                    <ThemedText.DeprecatedSubHeader fontWeight="bold" fontSize={16}>
                       {noLiquidity ? (
-                        <Trans>Initial prices and pool share</Trans>
+                        <Trans>Initial Prices And Pool Share</Trans>
                       ) : (
-                        <Trans>Prices and pool share</Trans>
+                        <Trans>Prices And Pool Share</Trans>
                       )}
                     </ThemedText.DeprecatedSubHeader>
                   </RowBetween>{' '}
-                  <LightCard padding="1rem" $borderRadius="20px">
-                    <PoolPriceBar
-                      currencies={currencies}
-                      poolTokenPercentage={poolTokenPercentage}
-                      noLiquidity={noLiquidity}
-                      price={price}
-                    />
-                  </LightCard>
-                </LightCard>
+                </BlueCard>
+                <DarkCard padding="1rem">
+                  <PoolPriceBar
+                    currencies={currencies}
+                    poolTokenPercentage={poolTokenPercentage}
+                    noLiquidity={noLiquidity}
+                    price={price}
+                  />
+                </DarkCard>
               </>
             )}
 
@@ -505,7 +508,14 @@ export default function AddLiquidity() {
 
       {!addIsUnsupported ? (
         pair && !noLiquidity && pairState !== PairState.INVALID ? (
-          <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
+          <AutoColumn
+            style={{
+              minWidth: '20rem',
+              width: '100%',
+              maxWidth: '420px',
+              marginTop: '1rem',
+            }}
+          >
             <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
           </AutoColumn>
         ) : null

@@ -4,15 +4,18 @@ import { Pair } from '@intimefinance/v2-sdk'
 import { Trans } from '@lingui/macro'
 import { Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
+import { ButtonPrimary } from 'components/Button'
 import MigrateSushiPositionCard from 'components/PositionCard/Sushi'
 import MigrateV2PositionCard from 'components/PositionCard/V2'
 import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
 import { PairState, useV2Pairs } from 'hooks/useV2Pairs'
 import { ReactNode, useMemo } from 'react'
+import { useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
 import { useTheme } from 'styled-components/macro'
 
-import { LightCard } from '../../components/Card'
+import { DarkCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import QuestionHelper from '../../components/QuestionHelper'
 import { AutoRow } from '../../components/Row'
@@ -20,14 +23,22 @@ import { Dots } from '../../components/swap/styleds'
 import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
 import { useTokenBalancesWithLoadingIndicator } from '../../state/connection/hooks'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
-import { BackArrow, StyledInternalLink, ThemedText } from '../../theme'
+import { BackArrow, ThemedText } from '../../theme'
 import { BodyWrapper } from '../AppBody'
 
 function EmptyState({ message }: { message: ReactNode }) {
   return (
-    <AutoColumn style={{ minHeight: 200, justifyContent: 'center', alignItems: 'center' }}>
-      <ThemedText.DeprecatedBody>{message}</ThemedText.DeprecatedBody>
-    </AutoColumn>
+    <DarkCard>
+      <AutoColumn
+        style={{
+          minHeight: 200,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <ThemedText.DeprecatedBody>{message}</ThemedText.DeprecatedBody>
+      </AutoColumn>
+    </DarkCard>
   )
 }
 
@@ -50,7 +61,12 @@ function toSushiLiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
   return new Token(tokenA.chainId, computeSushiPairAddress({ tokenA, tokenB }), 18, 'SLP', 'SushiSwap LP Token')
 }
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+
 export default function MigrateV2() {
+  const query = useQuery()
   const theme = useTheme()
   const { account, chainId } = useWeb3React()
 
@@ -116,7 +132,7 @@ export default function MigrateV2() {
       <BodyWrapper style={{ padding: 24 }}>
         <AutoColumn gap="16px">
           <AutoRow style={{ alignItems: 'center', justifyContent: 'space-between' }} gap="8px">
-            <BackArrow to="/pools" />
+            <BackArrow to={query.get('origin') ?? '/pools/v2'} />
             <ThemedText.DeprecatedMediumHeader>
               <Trans>Migrate V2 Liquidity</Trans>
             </ThemedText.DeprecatedMediumHeader>
@@ -133,19 +149,19 @@ export default function MigrateV2() {
           </ThemedText.DeprecatedBody>
 
           {!account ? (
-            <LightCard padding="40px">
+            <DarkCard padding="40px">
               <ThemedText.DeprecatedBody color={theme.textTertiary} textAlign="center">
                 <Trans>Connect to a wallet to view your V2 liquidity.</Trans>
               </ThemedText.DeprecatedBody>
-            </LightCard>
+            </DarkCard>
           ) : v2IsLoading ? (
-            <LightCard padding="40px">
+            <DarkCard padding="40px">
               <ThemedText.DeprecatedBody color={theme.textTertiary} textAlign="center">
                 <Dots>
                   <Trans>Loading</Trans>
                 </Dots>
               </ThemedText.DeprecatedBody>
-            </LightCard>
+            </DarkCard>
           ) : v2Pairs.filter(([, pair]) => !!pair).length > 0 ? (
             <>
               {v2Pairs
@@ -173,11 +189,23 @@ export default function MigrateV2() {
             <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
               <Trans>
                 Don’t see one of your v2 positions?{' '}
-                <StyledInternalLink id="import-pool-link" to="/pools/v2/find">
+                {/* <StyledInternalLink
+                  id="import-pool-link"
+                  to="/pools/v2/find?origin=/migrate/v2"
+                >
                   Import it.
-                </StyledInternalLink>
+                </StyledInternalLink> */}
               </Trans>
             </Text>
+            <ButtonPrimary
+              padding="8px"
+              as={Link}
+              id="import-pool-link"
+              to="/pools/v2/find?origin=/migrate/v2"
+              style={{ fontWeight: 'bold' }}
+            >
+              <Trans>Import Pool</Trans>
+            </ButtonPrimary>
           </AutoColumn>
         </AutoColumn>
       </BodyWrapper>

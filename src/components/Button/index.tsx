@@ -32,7 +32,7 @@ type BaseButtonProps = {
 export const BaseButton = styled(RebassButton)<BaseButtonProps>`
   padding: ${({ padding }) => padding ?? '16px'};
   width: ${({ width }) => width ?? '100%'};
-  font-weight: 500;
+  font-weight: bold;
   text-align: center;
   border-radius: ${({ $borderRadius }) => $borderRadius ?? '0px'};
   outline: none;
@@ -67,9 +67,8 @@ export const BaseButton = styled(RebassButton)<BaseButtonProps>`
 
 export const ButtonPrimary = styled(BaseButton)`
   background-color: ${({ theme }) => theme.accentAction};
-  font-size: 20px;
-  font-weight: 600;
-  padding: 16px;
+  font-size: 16px;
+  padding: ${({ padding }) => padding ?? '20px'};
   color: ${({ theme }) => theme.accentTextLightPrimary};
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.accentAction)};
@@ -103,8 +102,7 @@ export const SmallButtonPrimary = styled(ButtonPrimary)`
 const BaseButtonLight = styled(BaseButton)`
   background-color: ${({ theme }) => theme.accentActionSoft};
   color: ${({ theme }) => theme.accentAction};
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
 
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme, disabled }) => !disabled && theme.accentActionSoft};
@@ -146,7 +144,6 @@ export const ButtonGray = styled(BaseButton)`
   background-color: rgba(255, 255, 255, 0.1);
   color: ${({ theme }) => theme.textSecondary};
   font-size: 16px;
-  font-weight: bold;
 
   &:hover {
     background-color: ${({ theme, disabled }) => !disabled && darken(0.05, theme.backgroundInteractive)};
@@ -157,7 +154,7 @@ export const ButtonGray = styled(BaseButton)`
 `
 
 export const ButtonSecondary = styled(BaseButton)`
-  border: 1px solid ${({ theme }) => theme.deprecated_primary4};
+  border: 1px solid ${({ theme }) => theme.backgroundInteractive};
   color: ${({ theme }) => theme.accentAction};
   background-color: transparent;
   font-size: 16px;
@@ -165,14 +162,14 @@ export const ButtonSecondary = styled(BaseButton)`
 
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => theme.deprecated_primary4};
-    border: 1px solid ${({ theme }) => theme.deprecated_primary3};
+    border: 1px solid ${({ theme }) => theme.accentAction};
   }
   &:hover {
-    border: 1px solid ${({ theme }) => theme.deprecated_primary3};
+    border: 1px solid ${({ theme }) => theme.accentAction};
   }
   &:active {
     box-shadow: 0 0 0 1pt ${({ theme }) => theme.deprecated_primary4};
-    border: 1px solid ${({ theme }) => theme.deprecated_primary3};
+    border: 1px solid ${({ theme }) => theme.accentAction};
   }
   &:disabled {
     opacity: 50%;

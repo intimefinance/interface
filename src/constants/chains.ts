@@ -80,7 +80,7 @@ export const UNSUPPORTED_V2POOL_CHAIN_IDS = [
   SupportedChainId.ARBITRUM_ONE,
   SupportedChainId.BNB,
   SupportedChainId.ARBITRUM_GOERLI,
-  SupportedChainId.CORE_TEST,
+  // SupportedChainId.CORE_TEST,
 ] as const
 
 export const TESTNET_CHAIN_IDS = [

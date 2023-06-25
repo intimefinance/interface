@@ -186,7 +186,7 @@ export function ConfirmationModalContent({
     <Wrapper>
       <Section>
         <RowBetween>
-          <Text fontWeight={500} fontSize={16}>
+          <Text fontWeight="bold" fontSize={20}>
             {title}
           </Text>
           <CloseIcon onClick={onDismiss} data-cy="confirmation-close-icon" />
